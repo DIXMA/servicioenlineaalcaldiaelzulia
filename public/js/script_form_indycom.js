@@ -6,22 +6,31 @@ function cambioTipoActividad() {
 
 function validarExtension(id, error) {
     var val = $("#" + id).val();
-    var sizeByte = $("#" + id).size;
-    alert(sizeByte);
+    var input = document.getElementById(id);
+    var file = input.files[0];
+    //alert(file.size);
+    if (file.size > 1000000) {
+        var input = $('#' + id);
+        var clon = input.clone();
+        input.replaceWith(clon);
+        $("#" + error + '2').html("El archivo debe pesar <b>MENOS</b> de 1 MegaByte, por favor verifique e intentelo de nuevo.").show().fadeOut(8000);
+    } else {
+        $("#" + error).text("");
+    }
     var ext = (val.substring(val.lastIndexOf("."))).toLowerCase();
     if (ext !== '.pdf') {
         var input = $('#' + id);
         var clon = input.clone();
         input.replaceWith(clon);
-        $("#" + error).html("El archivo que intenta cargar no es un PDF, verifique e intentelo de nuevo.").delay(8000).hide(500);
+        $("#" + error).text("El archivo que intenta cargar no es un PDF, verifique e intentelo de nuevo.").show().fadeOut(8000);
     } else {
-        $("#" + error).html("");
+        $("#" + error).text("");
     }
 }
 
 function enviarForm(url) {
     var valida = 0;
-    alert("VALIDA - " + valida);
+    //alert("VALIDA - " + valida);
     var tipodocumento = $("#tipodocumento").val();
     if (tipodocumento === "x") {
         valida++;
@@ -132,7 +141,7 @@ function enviarForm(url) {
         $("#erroremail").text("");
     }
 
-    alert(valida);
+    //alert(valida);
 
     if (valida === 0) {
         document.getElementById("formIndyCom").submit();

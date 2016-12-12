@@ -32,7 +32,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="fecha">* Fecha de inicio, novedad o cese:</label>
-                    <input type="date" name="fecha" id="fecha" required="true" class="form-control" max="1998-12-31"> 
+                    <input type="date" name="fecha" id="fecha" required="true" class="form-control"> 
                     <span style="color: red;" id="errorfecha"></span>
                 </div>
                 <div class="form-group">
@@ -111,16 +111,19 @@
                     <label for="">* Fotocopia de la Cámara de Comercio: </label>
                     <input type="file" class="form-control" name="camaracomercio" id="camaracomercio" accept=".pdf" onchange="validarExtension('camaracomercio', 'errorcarmaracomercio')">
                     <span style="color: red;" id="errorcarmaracomercio"></span>
+                    <span style="color: red;" id="errorcarmaracomercio2"></span>
                 </div>
                 <div class="form-group">
                     <label for="">* Fotocopia de la Cédula: </label>
                     <input type="file" class="form-control" name="cedula" id="cedula" accept=".pdf" onchange="validarExtension('cedula', 'errorcedula')">
                     <span style="color: red;" id="errorcedula"></span>
+                    <span style="color: red;" id="errorcedula2"></span>
                 </div>
                 <div class="form-group">
                     <label for="">* Fotocopia del Rut: </label>
                     <input type="file" class="form-control" name="rut" id="rut" accept=".pdf" onchange="validarExtension('rut', 'errorrut')">
                     <span style="color: red;" id="errorrut"></span>
+                    <span style="color: red;" id="errorrut2"></span>
                 </div>
                 <div class="form-group">
                     <label for="email">* Correo de contacto:</label>
