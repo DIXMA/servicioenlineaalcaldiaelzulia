@@ -16,7 +16,14 @@
         <div class="container">
             <div class="row">
                 <h1>{{$titulo}}</h1>
-                <p style="text-align: justify;">{{$contenido}}</p>
+                <br/>
+                <h3 style="text-align: justify;">{{$contenido}}</h3>
+            </div>
+            <div class="row">
+                <br/>
+                <h3>Nota:</h3>
+                <h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>
+                <h5>Por favor, no responder este correo.</h5>
             </div>
         </div>
     </body>

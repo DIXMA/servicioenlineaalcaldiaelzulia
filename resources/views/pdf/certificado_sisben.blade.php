@@ -2,7 +2,7 @@
     <head>
         <title>Certificado Sisben</title>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
     </head>
     <body>
@@ -41,6 +41,7 @@
                             <th>2do. Apellido</th>
                             <th>Género</th>
                             <th>Ficha</th>
+                            <th>Puntaje</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,6 +74,7 @@
                             <td>Femenino</td>  
                             @endif
                             <td>{{$user->ficha}}</td>                            
+                            <td>13</td>
                         </tr>
                     </tbody>
                 </table>

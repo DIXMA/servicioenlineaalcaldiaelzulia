@@ -91,9 +91,9 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li class="header">Menú Principal</li>    
-                        <li><a href="{{URL::to('/')}}"><i class="fa fa-home"></i> <span>Registros Pendientes</span></a></li>
-                        <li><a href="{{URL::to('/')}}"><i class="fa fa-th-list"></i> Registros Avalados</a></li>
-                        <li><a href="{{URL::to('/')}}"><i class="fa fa-th-list"></i> Cerrar Sesión</a></li>
+                        <li><a href="{{URL::to('admin_indycom/registros')}}"><i class="fa fa-home"></i> <span>Registros Pendientes</span></a></li>
+                        <li><a href="{{URL::to('admin_indycom/registros/avalados')}}"><i class="fa fa-th-list"></i> Registros Avalados</a></li>
+                        <li><a href="{{URL::to('logout')}}"><i class="fa fa-th-list"></i> Cerrar Sesión</a></li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

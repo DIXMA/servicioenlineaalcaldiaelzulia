@@ -22,26 +22,26 @@ function validarObservaciones() {
     var obs_general = $("#obs_general").val();
     if (obs_general === "") {
         valida++;
-        $("#error_obs_general").text('Debe llenar este campo.').delay(8000).hide(500);
+        $("#error_obs_general").text('Debe llenar este campo.').show().fadeOut(8000);
     }
     var obs_documento = $("#obs_documento").val();
     if (obs_documento === "") {
         valida++;
-        $("#error_obs_documento").text('Debe llenar este campo.').delay(8000).hide(500);
+        $("#error_obs_documento").text('Debe llenar este campo.').show().fadeOut(8000);
     }
     var obs_camaradecomercio = $("#obs_camaradecomercio").val();
     if (obs_camaradecomercio === "") {
         valida++;
-        $("#error_obs_camaradecomercio").text('Debe llenar este campo.').delay(8000).hide(500);
+        $("#error_obs_camaradecomercio").text('Debe llenar este campo.').show().fadeOut(8000);
     }
     var obs_rut = $("#obs_rut").val();
     if(obs_rut === ""){
         valida++;
-        $("#error_obs_rut").text('Debe llenar este campo.').delay(8000).hide(500);
+        $("#error_obs_rut").text('Debe llenar este campo.').show().fadeOut(8000);
     }
     if($("#validado").val() === 'x'){
         valida++;
-        $("#error_chec").text('Debe seleccionar una opción.').delay(8000).hide(500);
+        $("#error_chec").text('Debe seleccionar una opción.').show().fadeOut(8000);
     }
 
     if (valida === 0) {

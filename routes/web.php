@@ -1,15 +1,5 @@
 <?php
 
-/*
-  |--------------------------------------------------------------------------
-  | Web Routes
-  |--------------------------------------------------------------------------
-  |
-  | This file is where you may define all of the routes that are handled
-  | by your application. Just tell Laravel the URIs it should respond
-  | to using a Closure or controller method. Build something great!
-  |
- */
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,4 +43,16 @@ Route::get('sisben/consultar/{ced}', array(
 
 Route::get('sisben/certificado/{id}', array(
     'uses' => 'ApiController@sisbenPDF'
+));
+
+Route::get('logout', array(
+    'uses' => 'ApiController@logout'
+));
+
+Route::get('indycom/send_mail/{id}', array(
+    'uses' => 'ApiController@mailValidacion'
+));
+
+Route::post('indycom/enviar', array(
+    'uses' => 'ApiController@enviarMailValidacion'
 ));
