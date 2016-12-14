@@ -126,14 +126,6 @@ class ApiController extends Controller
         $registro = RegistroIndycom::where('numero_identificacion', '=', $numero)->first();
         if (!$registro) {
             if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $camaracomercio && $cedula && $rut && $banco && $email) {
-                /*$user = new User();
-                $user->name = $nombres;
-                $user->email = $email;
-                $user->password = md5($numero);
-                $user->estado = 1;
-                $user->rol_id = 2;
-                $user->remember_token = '';
-                $user->save();*/
                 $registro = new RegistroIndycom();
                 $registro->estado = 'Pendiente';
                 $registro->email = $email;
@@ -167,8 +159,10 @@ class ApiController extends Controller
         return redirect()->back()->with('error', 'no se ha registrado');
     }
 
-
-
+    /**
+     * Función que muestra los registros pendientes por validar en el sistema
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     function registrosPendientes()
     {
         if (Auth::check()) {
@@ -188,6 +182,10 @@ class ApiController extends Controller
         return redirect('/')->with('error', 'Debe estar autenticado para acceder a está página.');
     }
 
+    /**
+     * Función que valida un registro de industria y comercio, con el estado Pendiente o Validado
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function validarRegistro()
     {
         $id = Input::get('id');
@@ -213,31 +211,6 @@ class ApiController extends Controller
         $registro->save();
 
         return redirect("indycom/send_mail/{$id_c}")->with("mensaje", "Se ha validado el registro como {$estado}, hora envíale la respuesta al usuario.");
-    }
-
-    function enviarMail($titulo, $contenido, $email)
-    {
-        $mail = new \PHPMailer(true); // notice the \  you have to use root namespace here
-        try {
-            $mail->isSMTP(); // tell to use smtp
-            $mail->CharSet = "utf-8"; // set charset to utf8
-            $mail->SMTPAuth = true;  // use smpt auth
-            $mail->SMTPSecure = "tls"; // or ssl
-            $mail->Host = "smtp.gmail.com";
-            $mail->Port = 587; // most likely something different for you. This is the mailtrap.io port i use for testing.
-            $mail->Username = "contacto.alcaldielzuliands@gmail.com";
-            $mail->Password = "alcaldielzuliands";
-            $mail->setFrom("contacto.alcaldielzuliands@gmail.com", "Alcaldia el Zulia");
-            $mail->Subject = $titulo;
-            $mail->MsgHTML($this->getMensajeHTMLregistroIndyCom($titulo, $contenido));
-            $mail->addAddress($email, "");
-            $mail->send();
-        } catch (phpmailerException $e) {
-            dd($e);
-        } catch (Exception $e) {
-            dd($e);
-        }
-        return 'ok';
     }
 
     function mailValidacion($id)
@@ -307,13 +280,47 @@ class ApiController extends Controller
      * @param $contenido Contenido del email
      * @return string Html completo para el email enviado
      */
-    protected function getMensajeHTMLregistroIndyCom($titulo, $contenido){
+    protected function getMensajeHTMLregistroIndyCom($titulo, $contenido)
+    {
         $msj = "<h1> $titulo </h1><br/>";
         $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
         $msj .= "<h3>Nota:</h3>";
         $msj .= "<h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>";
         $msj .= "<h5>Por favor, no responder este correo.</h5>";
         return $msj;
+    }
+
+    /**
+     * Función que envía un email
+     * @param $titulo Título del email
+     * @param $contenido Contenido del email
+     * @param $email Correo al que se envía
+     * @return string Ok
+     * @throws \phpmailerException Excepciones que se capturan al no poder enviar el correo
+     */
+    protected function enviarMail($titulo, $contenido, $email)
+    {
+        $mail = new \PHPMailer(true); // notice the \  you have to use root namespace here
+        try {
+            $mail->isSMTP(); // tell to use smtp
+            $mail->CharSet = "utf-8"; // set charset to utf8
+            $mail->SMTPAuth = true;  // use smpt auth
+            $mail->SMTPSecure = "tls"; // or ssl
+            $mail->Host = "smtp.gmail.com";
+            $mail->Port = 587; // most likely something different for you. This is the mailtrap.io port i use for testing.
+            $mail->Username = "contacto.alcaldielzuliands@gmail.com";
+            $mail->Password = "alcaldielzuliands";
+            $mail->setFrom("contacto.alcaldielzuliands@gmail.com", "Alcaldia el Zulia");
+            $mail->Subject = $titulo;
+            $mail->MsgHTML($this->getMensajeHTMLregistroIndyCom($titulo, $contenido));
+            $mail->addAddress($email, "");
+            $mail->send();
+        } catch (phpmailerException $e) {
+            dd($e);
+        } catch (Exception $e) {
+            dd($e);
+        }
+        return 'ok';
     }
 
 }
