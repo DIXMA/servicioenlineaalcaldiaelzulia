@@ -16,7 +16,7 @@
                     <div class="col-sm-2 col-md-8 col-md-offset-2">
                         <br/>
                         <p style="text-align: justify;">
-                            La Alcaldía Municipal de El Zulis ha dispuesto la siguiente aplicación para permitir a los inscritos en la base de datos local de Potenciales Beneficiarios a programas Sociales - SISBEN, verificar su información para fines de corrección de llegar a presentar alguna inconsistencia. esta información puede descargarse en línea.
+                            La Alcaldía Municipal de El Zulia ha dispuesto la siguiente aplicación para permitir a los inscritos en la base de datos local de Potenciales Beneficiarios a programas Sociales - SISBEN, verificar su información para fines de corrección de llegar a presentar alguna inconsistencia. esta información puede descargarse en línea.
                             <br/><br/>
                             Para realizar la busqueda solo tiene que escoger el tipo de documento y digitar el número de identificación sin puntos.
                         </p>

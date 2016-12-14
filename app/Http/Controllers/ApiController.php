@@ -19,6 +19,10 @@ use Barryvdh\DomPDF\Facade as PDF;
 class ApiController extends Controller
 {
 
+    /**
+     * Función que realiza el proceso de inicio de sesión en la plataforma
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function login()
     {
         $email = Input::get('email');
@@ -35,14 +39,22 @@ class ApiController extends Controller
         return redirect('admin_indycom')->with('error', "No coinciden los datos de acceso, por favor intentelo de nuevo.");
     }
 
+    /**
+     * Función que realiza el cierre de sesión en el sistema
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     function logout()
     {
-        if (Auth::check()) {
-            Auth::logout();
+        if (Auth::check()) { //valido que el usuario este logueado
+            Auth::logout();//cierro la sesión
         }
-        return redirect('/');
+        return redirect('/');//redirecciona al inicio
     }
 
+    /**
+     * Función que muestra el formulario para el registro en Cámara de Comercio
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     function verFomRegistroIndyCom()
     {
         $actividad = ActividadEconomica::all();
@@ -50,6 +62,10 @@ class ApiController extends Controller
         return view('indycom.web.form_registro_indycom', ['actividades' => $actividad, 'tipo_actividades' => $tipo_actividad]);
     }
 
+    /**
+     * Función que guarda la información de un nuevo registro en Cámara de Comercio
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function guardarRegistroIndycom()
     {
         $tipotramite = Input::get('tipotramite');
@@ -64,24 +80,26 @@ class ApiController extends Controller
         $tipoactividad = Input::get('tipoactividadeconomica');
         $telefono = Input::get('telefono');
         $regimen = Input::get('regimen');
+
         $camaracomercio = Input::file('camaracomercio');
         $cedula = Input::file('cedula');
         $rut = Input::file('rut');
+        $banco = Input::file('banco');
         $email = Input::get('email');
         $registro = RegistroIndycom::where('numero_identificacion', '=', $numero)->first();
         if (!$registro) {
-            if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $camaracomercio && $cedula && $rut && $email) {
-                $user = new User();
+            if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $camaracomercio && $cedula && $rut && $banco && $email) {
+                /*$user = new User();
                 $user->name = $nombres;
                 $user->email = $email;
                 $user->password = md5($numero);
                 $user->estado = 1;
                 $user->rol_id = 2;
                 $user->remember_token = '';
-                $user->save();
+                $user->save();*/
                 $registro = new RegistroIndycom();
                 $registro->estado = 'Pendiente';
-                $registro->user_id = $user->id;
+                $registro->email = $email;
                 $registro->tipo_tramite = $tipotramite;
                 $registro->fecha = $fecha;
                 $registro->tipo_documento = $tipodocumento;
@@ -97,14 +115,14 @@ class ApiController extends Controller
                 $registro->url_documento = $this->subir_archivo($cedula, $user->id, 'documento');
                 $registro->url_camaracomercio = $this->subir_archivo($camaracomercio, $user->id, 'camaracomercio');
                 $registro->url_rut = $this->subir_archivo($rut, $user->id, 'rut');
+                $registro->url_banco = $this->subir_archivo($banco, $user->id, 'banco');
                 $registro->save();
-                /*$this->enviarMail(
+                $this->enviarMail(
                     'Pre Registro Industria y Comercio',
-                    'Se ha realizado el regsitro existoamente, los datos serán validados y se notifica´ra por este medio del resultado del proceso.',
-                    $email,
-                    "email_template"
-                );*/
-                return redirect()->back()->with('mensaje', 'se ha registrado');
+                    'Se ha realizado el regsitro existoamente, los datos serán validados y se notificara por este medio del resultado del proceso.',
+                    $email
+                );
+                return redirect()->back()->with('mensaje', "El pre - registro se ha realizado exitosamente, se ha enviado un email de verificación del hecho a {$email}. \n Ahora entra en un proceso de validación de información, se comunicará el resultado por correo electrónico.");
             }
         } else {
             return redirect()->back()->with('error', "Ya se ha realizado con el npumero de identificación: $numero");
@@ -150,7 +168,6 @@ class ApiController extends Controller
         $obs_camaradecomercio = Input::get('obs_camaradecomercio');
         $obs_rut = Input::get('obs_rut');
         $estado = Input::get('validado');
-        $url_ini = Input::get('url');
 
         $observacionregistro = new ObservacionRegistro();
         $observacionregistro->observacion_general = $obs_general;
@@ -162,17 +179,37 @@ class ApiController extends Controller
 
         $observacionregistro->save();
         $id_c = encrypt($id);
-        return redirect("indycom/send_mail/{$id_c}")->with("mensaje", "Se ha validado el registro como {$estado}, hora envíale la respuesta al usuario.");
 
+        $registro = RegistroIndycom::findOrFail($id);
+        $registro->estado = $estado;
+        $registro->save();
+
+        return redirect("indycom/send_mail/{$id_c}")->with("mensaje", "Se ha validado el registro como {$estado}, hora envíale la respuesta al usuario.");
     }
 
-    function enviarMail($titulo, $contenido, $email, $template)
+    function enviarMail($titulo, $contenido, $email)
     {
-        Mail::send("emails.email_template", ['titulo' => $titulo, 'contenido' => $contenido], function ($messaje) use ($titulo, $email) {
-            $messaje->to($email, '')
-                ->from('contacto.alcaldielzuliands@gmail.com', 'Contacto AlcaldiaElZulia')
-                ->subject($titulo);
-        });
+        $mail = new \PHPMailer(true); // notice the \  you have to use root namespace here
+        try {
+            $mail->isSMTP(); // tell to use smtp
+            $mail->CharSet = "utf-8"; // set charset to utf8
+            $mail->SMTPAuth = true;  // use smpt auth
+            $mail->SMTPSecure = "tls"; // or ssl
+            $mail->Host = "smtp.gmail.com";
+            $mail->Port = 587; // most likely something different for you. This is the mailtrap.io port i use for testing.
+            $mail->Username = "contacto.alcaldielzuliands@gmail.com";
+            $mail->Password = "alcaldielzuliands";
+            $mail->setFrom("contacto.alcaldielzuliands@gmail.com", "Alcaldia el Zulia");
+            $mail->Subject = $titulo;
+            $mail->MsgHTML($this->getMensajeHTMLregistroIndyCom($titulo, $contenido));
+            $mail->addAddress($email, "");
+            $mail->send();
+        } catch (phpmailerException $e) {
+            dd($e);
+        } catch (Exception $e) {
+            dd($e);
+        }
+        return 'ok';
     }
 
     function mailValidacion($id)
@@ -227,6 +264,17 @@ class ApiController extends Controller
         $mes = date("m");
         $ano = date("Y");
         return PDF::loadView('pdf.certificado_sisben', array('user' => $sisben, 'dia' => $dia, 'mes' => $mes, 'ano' => $ano))->setPaper('a4', 'landscape')->stream('certificado.pdf');
+    }
+
+    function getMensajeHTMLregistroIndyCom($titulo, $contenido){
+
+        $msj = "<h1> $titulo </h1><br/>";
+        $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
+        $msj .= "<h3>Nota:</h3>";
+        $msj .= "<h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>";
+        $msj .= "<h5>Por favor, no responder este correo.</h5>";
+
+        return $msj;
     }
 
 }

@@ -109,6 +109,22 @@ function enviarForm(url) {
         $("#errortelefono").text("");
     }
 
+    var matricula = $("#matricula").val();
+    if (matricula === "") {
+        valida++;
+        $("#errormatricula").text("Debe digitar el número de matricula de cámara de comercio.").show().fadeOut(6000);
+    } else {
+        $("#errormatricula").text("");
+    }
+
+    var fmatricula = $("#fecha_matricula").val();
+    if (fmatricula === "") {
+        valida++;
+        $("#errorfecha_matricula").text("Debe seleccionar la fecha de matricula de cámara de comercio.").show().fadeOut(6000);
+    } else {
+        $("#errorfecha_matricula").text("");
+    }
+
     var camaracomercio = $("#camaracomercio").val();
     if (camaracomercio === "") {
         valida++;
@@ -131,6 +147,14 @@ function enviarForm(url) {
         $("#errorrut").text("Debe adjuntar la copiar del rut.").show().fadeOut(6000);
     } else {
         $("#errorrut").text("");
+    }
+
+    var banco = $("#banco").val();
+    if (banco === "") {
+        valida++;
+        $("#errorbanco").text("Debe adjuntar la copiar del pago en el banco.").show().fadeOut(6000);
+    } else {
+        $("#errorbanco").text("");
     }
 
     var emal = $("#emal").val();
