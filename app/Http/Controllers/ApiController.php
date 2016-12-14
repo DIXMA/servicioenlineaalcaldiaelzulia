@@ -19,6 +19,39 @@ use Barryvdh\DomPDF\Facade as PDF;
 class ApiController extends Controller
 {
 
+    /****************************************************************************************************************
+     * FUNCIONES SISBEN
+     ****************************************************************************************************************/
+
+    /**
+     * Función que devuelve el resultado de la consulta en la base de datos del sisben
+     * @param $ced Documento a consultar
+     * @return mixed Información obtenida de la BD
+     */
+    function consultarSisben($ced)
+    {
+        $sisben = Sisben::where('numero_documento', '=', $ced)->first();
+        return $sisben;
+    }
+
+    /**
+     * Función que carga y convierte el pdf para la consulta del SISBEN
+     * @param $id Número de documento consultado en la base de datos del SISBEN
+     * @return mixed PDF
+     */
+    function sisbenPDF($id)
+    {
+        $sisben = Sisben::where('numero_documento', '=', $id)->first();
+        $dia = date("d");
+        $mes = date("m");
+        $ano = date("Y");
+        return PDF::loadView('pdf.certificado_sisben', array('user' => $sisben, 'dia' => $dia, 'mes' => $mes, 'ano' => $ano))->setPaper('a4', 'landscape')->stream('certificado.pdf');
+    }
+
+    /****************************************************************************************************************
+     * FUNCIONES LOGIN
+     ****************************************************************************************************************/
+
     /**
      * Función que realiza el proceso de inicio de sesión en la plataforma
      * @return \Illuminate\Http\RedirectResponse
@@ -51,6 +84,10 @@ class ApiController extends Controller
         return redirect('/');//redirecciona al inicio
     }
 
+
+    /****************************************************************************************************************
+     * FUNCIONES INDYCOM
+     ****************************************************************************************************************/
     /**
      * Función que muestra el formulario para el registro en Cámara de Comercio
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -130,16 +167,7 @@ class ApiController extends Controller
         return redirect()->back()->with('error', 'no se ha registrado');
     }
 
-    private function subir_archivo($imagen_principal, $id, $tipo)
-    {
-        $nombre = $imagen_principal->getClientOriginalName();
-        $extension = explode('.', $nombre);
-        $ruta_disco = public_path() . '/archivos/' . $id;
-        $imagen_principal->move($ruta_disco, "{$tipo}_{$id}.{$extension[1]}");
-        //error_log("NOMBRE . . - - - " . $ruta_disco . $nombre);
-        $ruta = "archivos/$id/{$tipo}_{$id}.{$extension[1]}";
-        return $ruta;
-    }
+
 
     function registrosPendientes()
     {
@@ -251,29 +279,40 @@ class ApiController extends Controller
         return redirect('admin_indycom/registros')->with('mensaje', 'Se ha notificado al usuario.');
     }
 
-    function consultarSisben($ced)
+    /****************************************************************************************************************
+     * FUNCIONES PROTEGIDAS - PRIVADAS
+     ****************************************************************************************************************/
+
+    /**
+     * Función que realiza la subida de un archivo en el servidor
+     * @param $archivo Archivo tomado del formulario
+     * @param $id Identificador del objeto con que se relaciona el archivo subido
+     * @param $tipo Tipo de archivo que se sube - nombre
+     * @return string Ruta donde se almacena el archivo.
+     */
+    protected function subir_archivo($archivo, $id, $tipo)
     {
-        $sisben = Sisben::where('numero_documento', '=', $ced)->first();
-        return $sisben;
+        $nombre = $archivo->getClientOriginalName();
+        $extension = explode('.', $nombre);
+        $ruta_disco = public_path() . '/archivos/' . $id;
+        $archivo->move($ruta_disco, "{$tipo}_{$id}.{$extension[1]}");
+        //error_log("NOMBRE . . - - - " . $ruta_disco . $nombre);
+        $ruta = "archivos/$id/{$tipo}_{$id}.{$extension[1]}";
+        return $ruta;
     }
 
-    function sisbenPDF($id)
-    {
-        $sisben = Sisben::where('numero_documento', '=', $id)->first();
-        $dia = date("d");
-        $mes = date("m");
-        $ano = date("Y");
-        return PDF::loadView('pdf.certificado_sisben', array('user' => $sisben, 'dia' => $dia, 'mes' => $mes, 'ano' => $ano))->setPaper('a4', 'landscape')->stream('certificado.pdf');
-    }
-
-    function getMensajeHTMLregistroIndyCom($titulo, $contenido){
-
+    /**
+     * Función que obtiene el html para enviar el email qde informe de registro de indutria y comercio
+     * @param $titulo Titulo del email
+     * @param $contenido Contenido del email
+     * @return string Html completo para el email enviado
+     */
+    protected function getMensajeHTMLregistroIndyCom($titulo, $contenido){
         $msj = "<h1> $titulo </h1><br/>";
         $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
         $msj .= "<h3>Nota:</h3>";
         $msj .= "<h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>";
         $msj .= "<h5>Por favor, no responder este correo.</h5>";
-
         return $msj;
     }
 
