@@ -117,7 +117,8 @@ class ApiController extends Controller
         $tipoactividad = Input::get('tipoactividadeconomica');
         $telefono = Input::get('telefono');
         $regimen = Input::get('regimen');
-
+        $matricula = Input::get('matricula');
+        $fecha_matricula = Input::get('fecha_matricula');
         $camaracomercio = Input::file('camaracomercio');
         $cedula = Input::file('cedula');
         $rut = Input::file('rut');
@@ -125,7 +126,7 @@ class ApiController extends Controller
         $email = Input::get('email');
         $registro = RegistroIndycom::where('numero_identificacion', '=', $numero)->first();
         if (!$registro) {
-            if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $camaracomercio && $cedula && $rut && $banco && $email) {
+            if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $matricula && $fecha_matricula && $camaracomercio && $cedula && $rut && $banco && $email) {
                 $registro = new RegistroIndycom();
                 $registro->estado = 'Pendiente';
                 $registro->email = $email;
@@ -141,10 +142,13 @@ class ApiController extends Controller
                 $registro->tipo_actividad = $tipoactividad;
                 $registro->telefono = $telefono;
                 $registro->regimen = $regimen;
-                $registro->url_documento = $this->subir_archivo($cedula, $user->id, 'documento');
-                $registro->url_camaracomercio = $this->subir_archivo($camaracomercio, $user->id, 'camaracomercio');
-                $registro->url_rut = $this->subir_archivo($rut, $user->id, 'rut');
-                $registro->url_banco = $this->subir_archivo($banco, $user->id, 'banco');
+                $registro->matricula = $matricula;
+                $registro->fecha_matricula = $fecha_matricula;
+                $registro->save();
+                $registro->url_documento = $this->subir_archivo($cedula, $registro->id, 'documento');
+                $registro->url_camaracomercio = $this->subir_archivo($camaracomercio, $registro->id, 'camaracomercio');
+                $registro->url_rut = $this->subir_archivo($rut, $registro->id, 'rut');
+                $registro->url_banco = $this->subir_archivo($banco, $registro->id, 'banco');
                 $registro->save();
                 $this->enviarMail(
                     'Pre Registro Industria y Comercio',
@@ -172,12 +176,13 @@ class ApiController extends Controller
                 ->join('indycom_tipoactividadeconomica', 'indycom_tipoactividadeconomica.id', '=', 'indycom_registro.tipo_actividad')
                 ->where('indycom_registro.estado', 'LIKE', 'Pendiente')
                 ->select(
-                    'indycom_registro.id', 'indycom_registro.estado', 'indycom_registro.user_id', 'indycom_registro.tipo_tramite as tipo_tramite_id', 'indycom_tipotramite.name as tipo_tramite_name', 'indycom_registro.fecha as fecha_registro', 'indycom_registro.tipo_documento', 'indycom_registro.numero_identificacion', 'indycom_registro.naturaleza_juridica', 'indycom_registro.razon_social', 'indycom_registro.direccion_notificacion', 'indycom_registro.actividad_economica as actividad_economica_id', 'indycom_actividadeconomica.name as actividad_economica_name', 'indycom_registro.direccion_establecimiento', 'indycom_registro.tipo_actividad as tipo_actividad_id', 'indycom_tipoactividadeconomica.name as tipo_actividad_name', 'indycom_registro.telefono', 'indycom_registro.regimen', 'indycom_registro.url_documento', 'indycom_registro.url_camaracomercio', 'indycom_registro.url_rut'
+                    'indycom_registro.id', 'indycom_registro.estado', 'indycom_registro.tipo_tramite as tipo_tramite_id', 'indycom_tipotramite.name as tipo_tramite_name', 'indycom_registro.fecha as fecha_registro', 'indycom_registro.tipo_documento', 'indycom_registro.numero_identificacion', 'indycom_registro.naturaleza_juridica', 'indycom_registro.razon_social', 'indycom_registro.direccion_notificacion', 'indycom_registro.actividad_economica as actividad_economica_id', 'indycom_actividadeconomica.name as actividad_economica_name', 'indycom_registro.direccion_establecimiento', 'indycom_registro.tipo_actividad as tipo_actividad_id', 'indycom_tipoactividadeconomica.name as tipo_actividad_name', 'indycom_registro.telefono', 'indycom_registro.regimen', 'indycom_registro.url_documento', 'indycom_registro.url_camaracomercio', 'indycom_registro.url_rut'
                 )
-                ->paginate(15);
+                ->paginate(8);
             $cant_regP = count(RegistroIndycom::where('estado', 'LIKE', 'Pendiente')->get());
             $cant_regV = count(RegistroIndycom::where('estado', 'LIKE', 'Validado')->get());
-            return view('indycom.admin.registrospendientes', ['registros' => $registros, 'cant_pendientes' => $cant_regP, 'cant_validados' => $cant_regV]);
+            $cant_regO = count(RegistroIndycom::where('estado', 'LIKE', 'Observaciones')->get());
+            return view('indycom.admin.registrospendientes', ['registros' => $registros, 'cant_pendientes' => $cant_regP, 'cant_validados' => $cant_regV, 'cant_observaciones' => $cant_regO]);
         }
         return redirect('/')->with('error', 'Debe estar autenticado para acceder a está página.');
     }
@@ -193,13 +198,16 @@ class ApiController extends Controller
         $obs_documento = Input::get('obs_documento');
         $obs_camaradecomercio = Input::get('obs_camaradecomercio');
         $obs_rut = Input::get('obs_rut');
+        $obs_banco = Input::get('obs_banco');
         $estado = Input::get('validado');
+        $url = Input::get('url');
 
         $observacionregistro = new ObservacionRegistro();
         $observacionregistro->observacion_general = $obs_general;
         $observacionregistro->observacion_cedula = $obs_documento;
         $observacionregistro->observacion_rut = $obs_rut;
         $observacionregistro->observacion_camaracomercio = $obs_camaradecomercio;
+        $observacionregistro->observacion_banco = $obs_banco;
         $observacionregistro->estado = $estado;
         $observacionregistro->registro_id = $id;
 
@@ -209,8 +217,22 @@ class ApiController extends Controller
         $registro = RegistroIndycom::findOrFail($id);
         $registro->estado = $estado;
         $registro->save();
-
-        return redirect("indycom/send_mail/{$id_c}")->with("mensaje", "Se ha validado el registro como {$estado}, hora envíale la respuesta al usuario.");
+        if ($estado == "Validado") {
+            return redirect("indycom/send_mail/{$id_c}")->with("mensaje", "Se ha validado el registro como {$estado}, hora envíale la respuesta al usuario.");
+        } else {
+            $this->enviarMail("Observaciones Registro Industria y Comercio",
+                $this->getMensajeHTMLvalidacionPendienteIndyCom(
+                    'Resultado del Proceso de Verificación',
+                    "Hemos encontrado unas inconsistencias generales al registro realizado en Industria y Comercio, a continuaión indicamos la sobservaciones para que sean subsanadas",
+                    $obs_general,
+                    $obs_documento,
+                    $obs_camaradecomercio,
+                    $obs_rut,
+                    $obs_banco, $url, $id),
+                $registro->email
+            );
+        }
+        return redirect()->back()->with("mensaje", "Se ha validado el registro como {$estado}, se ha enviado por email, las observaciones generadas, para que el usuario las subsane.");
     }
 
     function mailValidacion($id)
@@ -284,6 +306,25 @@ class ApiController extends Controller
     {
         $msj = "<h1> $titulo </h1><br/>";
         $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
+        $msj .= "<h3>Nota:</h3>";
+        $msj .= "<h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>";
+        $msj .= "<h5>Por favor, no responder este correo.</h5>";
+        return $msj;
+    }
+
+    protected function  getMensajeHTMLvalidacionPendienteIndyCom($titulo, $contenido, $obsG, $obsD, $obsCm, $obsR, $obsB, $url, $id)
+    {
+        $idC = crypt($id);
+        $msj = "<h1> $titulo </h1>";
+        $msj .= "<br/>";
+        $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
+        $msj .= "<h2>Observaciones Generales: </h2><p>$obsG</p>";
+        $msj .= "<h2>Observaciones del Adjunto de Documento de Identidadc: </h2><p>$obsD</p>";
+        $msj .= "<h2>Observaciones del Adjunto Cámara de Comercio: </h2><p>$obsCm</p>";
+        $msj .= "<h2>Observaciones del Adjunto RUT: </h2><p>$obsR</p>";
+        $msj .= "<h2>Observaciones del Adjunto Pago en Banco: </h2><p>$obsB</p>";
+        $msj .= 'Para realizar el proceso de correcciónes, puede acceder haciendo <a href="'.$url.'indycom/editar/'.$idC.' target="_blank">clic aquí.</a>';
+        $msj .= "<br/>";
         $msj .= "<h3>Nota:</h3>";
         $msj .= "<h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>";
         $msj .= "<h5>Por favor, no responder este correo.</h5>";

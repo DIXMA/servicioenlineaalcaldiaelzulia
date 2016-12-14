@@ -3,7 +3,7 @@
 @section('content')
     <section class="content">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="box box-solid">
                     <div class="box-header with-border">
                         <h3 class="box-title">Registros</h3>
@@ -21,6 +21,8 @@
                             <li><a href="#"><i class="fa fa-envelope-o"></i> Validados <span
                                             class="label label-success pull-right">{{$cant_validados}}</span></a></li>
                             </a></li>
+                            <li><a href="#"><i class="fa fa-question-circle"></i> Observaciones <span
+                                            class="label label-warning pull-right">{{$cant_observaciones}}</span></a></li>
                         </ul>
                     </div>
                     <!-- /.box-body -->
@@ -28,8 +30,8 @@
 
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
-                <div class="box box-primary">
+            <div class="col-md-12">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <h3 class="box-title">Listado de Registros Pendientes</h3>
                     </div>
@@ -178,14 +180,19 @@
                             </div>
                             <div class="form-group">
                                 <label>Observación Adjunto RUT</label>
-                                <textarea name="obs_rut" class="form-control"></textarea>
+                                <textarea name="obs_rut" id="obs_rut" class="form-control"></textarea>
                                 <span style="color: red;" id="error_obs_rut"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Observación Adjunto Pago en Banco</label>
+                                <textarea name="obs_banco" id="obs_banco" class="form-control"></textarea>
+                                <span style="color: red;" id="error_obs_banco"></span>
                             </div>
                             <div class="form-group">
                                 <label>Validacion</label>
                                 <select class="form-control" name="validado" id="validado">
                                     <option value="x">- Seleccione una opción -</option>
-                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Observaciones">Pendiente</option>
                                     <option value="Validado">Validado</option>
                                 </select>
                                 <span style="color: red;" id="error_chec"></span>
@@ -194,6 +201,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <input type="hidden" value="{{URL::to('/')}}" name="url">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                         <button type="button" class="btn btn-success" onclick="validarObservaciones()">Validar</button>
                     </div>

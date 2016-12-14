@@ -39,6 +39,11 @@ function validarObservaciones() {
         valida++;
         $("#error_obs_rut").text('Debe llenar este campo.').show().fadeOut(8000);
     }
+    var obs_banco = $("#obs_banco").val();
+    if(obs_banco === ""){
+        valida++;
+        $("#error_obs_banco").text('Debe llenar este campo.').show().fadeOut(8000);
+    }
     if($("#validado").val() === 'x'){
         valida++;
         $("#error_chec").text('Debe seleccionar una opción.').show().fadeOut(8000);

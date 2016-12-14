@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecabe3d0-a57c-4465-b5e4-b56f7713b4bd" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/10/camaracomercio_10.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/10/documento_10.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/10/rut_10.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/8/camaracomercio_8.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/8/documento_8.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/8/rut_8.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/9/camaracomercio_9.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/9/documento_9.pdf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archivos/9/rut_9.pdf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/script_registros_admin.js" afterPath="$PROJECT_DIR$/public/js/script_registros_admin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php" afterPath="$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php" afterPath="$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" afterPath="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/template/template_web.blade.php" afterPath="$PROJECT_DIR$/resources/views/template/template_web.blade.php" />
     </list>
     <ignored path="alcaldiaelzuliands.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,32 +52,21 @@
       <file leaf-file-name="ApiController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApiController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.6602871">
-              <caret line="192" column="30" selection-start-line="192" selection-start-column="30" selection-end-line="192" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.6136364">
+              <caret line="180" column="28" selection-start-line="180" selection-start-column="28" selection-end-line="180" selection-end-column="28" />
               <folding>
-                <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+                <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+                <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form_registro_indycom.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php">
+      <file leaf-file-name="registrospendientes.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.615385">
-              <caret line="124" column="77" selection-start-line="124" selection-start-column="77" selection-end-line="124" selection-end-column="77" />
-              <folding>
-                <element signature="e#7952#7971#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script_form_indycom.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/script_form_indycom.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="124" column="32" selection-start-line="124" selection-start-column="32" selection-end-line="124" selection-end-column="32" />
+            <state vertical-scroll-proportion="-16.346153">
+              <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -79,9 +82,6 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/resources/views/emails/email_template.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/script_registros_admin.js" />
-        <option value="$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/emails/email_validacion.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
@@ -91,8 +91,12 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php" />
         <option value="$PROJECT_DIR$/public/js/script_form_indycom.js" />
+        <option value="$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/template/template_web.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/script_registros_admin.js" />
+        <option value="$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
       </list>
     </option>
@@ -214,6 +218,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="indycom" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -291,6 +317,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="archivos" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -373,7 +417,13 @@
       <option name="project" value="LOCAL" />
       <updated>1481684218833</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ACOMODANDO API CONTROLLER CON DOCUMENTACION Y REESTRUCTURACION DE FUNCIONES">
+      <created>1481684508376</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1481684508376</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -384,7 +434,7 @@
     <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24296875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24296875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -438,7 +488,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="101" column="34" selection-start-line="101" selection-start-column="34" selection-end-line="101" selection-end-column="34" />
           <folding>
-            <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -455,9 +506,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="128" column="69" selection-start-line="128" selection-start-column="69" selection-end-line="128" selection-end-column="69" />
-          <folding>
-            <element signature="e#7952#7971#0#HTML" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -482,7 +531,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -491,9 +541,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="129" column="68" selection-start-line="129" selection-start-column="66" selection-end-line="129" selection-end-column="71" />
-          <folding>
-            <element signature="e#7952#7971#0#HTML" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -510,7 +558,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -527,7 +576,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
           <folding>
-            <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -558,7 +608,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
           <folding>
-            <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -596,20 +647,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="95" column="54" selection-start-line="95" selection-start-column="54" selection-end-line="95" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/script_registros_admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/console.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -621,13 +658,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="90" selection-start-line="28" selection-start-column="84" selection-end-line="28" selection-end-column="90" />
         </state>
       </provider>
     </entry>
@@ -753,22 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.576923">
-          <caret line="56" column="49" selection-start-line="56" selection-start-column="49" selection-end-line="56" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8672249">
-          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/script_form_indycom.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -779,20 +793,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.615385">
-          <caret line="124" column="77" selection-start-line="124" selection-start-column="77" selection-end-line="124" selection-end-column="77" />
+        <state vertical-scroll-proportion="0.1423445">
+          <caret line="7" column="43" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15669857">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-28.576923">
+          <caret line="56" column="49" selection-start-line="56" selection-start-column="49" selection-end-line="56" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/template/template_web.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37320575">
+          <caret line="122" column="98" selection-start-line="122" selection-start-column="98" selection-end-line="122" selection-end-column="98" />
           <folding>
-            <element signature="e#7952#7971#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/script_registros_admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6450116">
+          <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.461538">
+          <caret line="92" column="64" selection-start-line="92" selection-start-column="64" selection-end-line="92" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/registrospendientes.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.346153">
+          <caret line="31" column="26" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApiController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.6602871">
-          <caret line="192" column="30" selection-start-line="192" selection-start-column="30" selection-end-line="192" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.6136364">
+          <caret line="180" column="28" selection-start-line="180" selection-start-column="28" selection-end-line="180" selection-end-column="28" />
           <folding>
-            <marker date="1481684452767" expanded="true" signature="14116:14136" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="15540:15560" placeholder="..." />
+            <marker date="1481689478344" expanded="true" signature="16077:16097" placeholder="..." />
           </folding>
         </state>
       </provider>
