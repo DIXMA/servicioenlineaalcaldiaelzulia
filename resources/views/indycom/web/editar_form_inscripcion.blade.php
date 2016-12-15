@@ -78,7 +78,7 @@
                         DATOS A CARGAR
                     </div>
                     <div class="box-body">
-                        {!! Form::open(array('url' => 'indycom/editar_registro', 'method' => 'post', 'files' => 'yes', 'id' => 'formIndyCom')) !!}
+                        {!! Form::open(array('url' => 'indycom/editar', 'method' => 'post', 'files' => 'yes', 'id' => 'formIndyCom')) !!}
                         <div class="form-group">
                             <label for="">* Fotocopia de la Cámara de Comercio: </label>
                             <input type="file" class="form-control" name="camaracomercio" id="camaracomercio"
@@ -108,7 +108,7 @@
                             <span style="color: red;" id="errorbanco"></span>
                             <span style="color: red;" id="errorbanco2"></span>
                         </div>
-                        {!! Form::close() !!}
+
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
@@ -117,10 +117,11 @@
                         <a href="{{URL::to('/')}}" class="btn btn-danger pull-left" id="cancel"><i
                                     class="fa fa-close"></i> Cancelar
                         </a>
-                        <button class="btn btn-success pull-right" id="enviar" onclick="enviarDatosEditar()"><i
+                        <button type="submit" class="btn btn-success pull-right" id="enviar"><i
                                     class="fa fa-send"></i> Enviar
                         </button>
                     </div>
+                    {!! Form::close() !!}
                 </div>
 
             </div>

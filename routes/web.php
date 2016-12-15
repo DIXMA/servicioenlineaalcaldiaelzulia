@@ -72,3 +72,7 @@ Route::get('indycom/certificado/{id}', array(
 Route::get('indycom/editar/{id}', array(
     'uses' => 'ApiController@editarRegistroIndycom'
 ));
+
+Route::post('indycom/editar', array(
+    'uses' => 'ApiController@editarIndycom'
+));

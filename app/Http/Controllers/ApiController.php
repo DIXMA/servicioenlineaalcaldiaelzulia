@@ -354,6 +354,11 @@ class ApiController extends Controller
         return redirect('/')->with('error', 'Debe estar autenticado para acceder a está página.');
     }
 
+    /**
+     * Función que muestra el formulario para editar la información de un registro en indycom
+     * @param $id Identificador del registro
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     function editarRegistroIndycom($id)
     {
         $registro = RegistroIndycom::findOrFail($id);
@@ -363,6 +368,49 @@ class ApiController extends Controller
             return view('indycom.web.editar_form_inscripcion', ['registro' => $registro, 'actividad' => $actividad, 'tipo_act' => $tipo_actividad]);
         }
         return redirect('/')->with('error', 'No se encuentra la ifnromación necesaria para realizar el proceso, por favor verifique e intentelo de nuevo.');
+    }
+
+    function editarIndycom()
+    {
+        $id = Input::get('id');
+        $registro = RegistroIndycom::findOrFail($id);
+        if ($registro) {
+            $cambios = 0;
+            $ccm = Input::file('camaracomercio');
+            if ($ccm) {
+                $registro->url_camaracomercio = $this->subir_archivo($ccm, $id, 'camaracomercio');
+                $cambios++;
+            }
+            $doc = Input::file('cedula');
+            if ($doc) {
+                $registro->url_documento = $this->subir_archivo($doc, $id, 'documento');
+                $cambios++;
+            }
+            $rut = Input::file('rut');
+            if ($rut) {
+                $registro->url_rut = $this->subir_archivo($rut, $id, 'rut');
+                $cambios++;
+            }
+            $banco = Input::file('banco');
+            if ($banco) {
+                $registro->url_banco = $this->subir_archivo($banco, $registro->id, 'banco');
+                $cambios++;
+            }
+
+            if ($cambios > 0) {
+                $registro->estado = 'Pendiente';
+                $registro->save();
+                $this->enviarMail(
+                    'Se han realizado los cambios',
+                    'Gracias por estar al tanto del proceso, los cambos han sido guardados y se procederá a verificar, se notificará por este medio cuando el proceso culmine.',
+                    $registro->email
+                );
+                return redirect('/')->with('mensaje', "Se han realizado los cambios en el registro, agradecemos la paciencia, ahora iniciamos nuevamente el proceso de verifiación de la información. Una ve terminado el proceso se notificará por correo electrónico el resultado del proceso.");
+            } else {
+                return redirect()->back()->with('error', "No se ha realizado ningún cambio, por favor verifique bien el correo, y realice los cambios indicados en las observaciones al registro.");
+            }
+        }
+        return redirect('/')->with('error', 'No se ha encontrado la información necesaria para ejecutar la acción, por favor verifique e intentelo de nuevo.');
     }
 
     /****************************************************************************************************************
