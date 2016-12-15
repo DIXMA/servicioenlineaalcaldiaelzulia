@@ -98,7 +98,7 @@
                     <div class="box-footer clearfix">
                         <input type="hidden" name="id" id="id" value="{{$registro->id}}">
                         <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
-                        <button class="btn btn-danger pull-left" id="cancel"><i class="fa fa-close"></i> Cancelar</button>
+
                         <button class="btn btn-success pull-right" id="enviar" onclick="enviarDatos()"><i class="fa fa-send"></i> Enviar</button>
                     </div>
                 </div>

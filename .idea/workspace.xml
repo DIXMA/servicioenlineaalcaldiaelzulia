@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ecabe3d0-a57c-4465-b5e4-b56f7713b4bd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/indycom/web/editar_form_inscripcion.blade.php" afterPath="$PROJECT_DIR$/resources/views/indycom/web/editar_form_inscripcion.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php" afterPath="$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php" />
     </list>
     <ignored path="alcaldiaelzuliands.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,11 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="529">
               <caret line="75" column="27" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="send_mail.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -89,7 +97,6 @@
         <option value="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/welcome.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/indycom/web/form_registro_indycom.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php" />
         <option value="$PROJECT_DIR$/public/js/script_validacion_registro.js" />
         <option value="$PROJECT_DIR$/resources/views/pdf/certificado_inydom.blade.php" />
         <option value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/config/dompdf.php" />
@@ -102,6 +109,7 @@
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
         <option value="$PROJECT_DIR$/resources/views/indycom/web/editar_form_inscripcion.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php" />
       </list>
     </option>
   </component>
@@ -451,7 +459,7 @@
       <workItem from="1481657636699" duration="32000" />
       <workItem from="1481725907914" duration="10453000" />
       <workItem from="1481742593194" duration="10529000" />
-      <workItem from="1481812688035" duration="5907000" />
+      <workItem from="1481812688035" duration="6104000" />
     </task>
     <task id="LOCAL-00001" summary="Mailer">
       <created>1481656704761</created>
@@ -495,11 +503,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481816058135</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Terinado proceso de INDYCOM">
+      <created>1481818833107</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1481818833108</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27654000" />
+    <option name="totallyTimeSpent" value="27851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="-8" width="1320" height="784" extended-state="6" />
@@ -550,7 +565,8 @@
     <MESSAGE value="ACOMODANDO API CONTROLLER CON DOCUMENTACION Y REESTRUCTURACION DE FUNCIONES" />
     <MESSAGE value="Continuando el desarrollo, con los datos para validaciones de registros indycom" />
     <MESSAGE value="Se acomodan detalles generales en el proceso de indycom además, se simplifican algunos detalles de los pdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se acomodan detalles generales en el proceso de indycom además, se simplifican algunos detalles de los pdf" />
+    <MESSAGE value="Terinado proceso de INDYCOM" />
+    <option name="LAST_COMMIT_MESSAGE" value="Terinado proceso de INDYCOM" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -857,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="107" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/script_form_indycom.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -943,6 +951,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
           <caret line="75" column="27" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
           <folding />
         </state>
       </provider>
