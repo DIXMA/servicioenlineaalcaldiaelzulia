@@ -53,6 +53,22 @@ Route::get('indycom/send_mail/{id}', array(
     'uses' => 'ApiController@mailValidacion'
 ));
 
-Route::post('indycom/enviar', array(
-    'uses' => 'ApiController@enviarMailValidacion'
+Route::get('indycom/validar', array(
+    'uses' => 'ApiController@enviarValidacion'
+));
+
+Route::get('indycom/registros/validados', array(
+    'uses' => "ApiController@registrosValidados"
+));
+
+Route::get('indycom/registros/observciones', array(
+    'uses' => 'ApiController@registrosObservaciones'
+));
+
+Route::get('indycom/certificado/{id}', array(
+    'uses' => 'ApiController@indycomPDF'
+));
+
+Route::get('indycom/editar/{id}', array(
+    'uses' => 'ApiController@editarRegistroIndycom'
 ));

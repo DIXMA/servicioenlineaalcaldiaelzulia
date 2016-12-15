@@ -1,13 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Diegox_Cortex
- * Date: 12/12/2016
- * Time: 10:29 PM
- */
-?>
-
-@extends('template.template_admin_indycom')
+@extends('template.template_web')
 
 @section('content')
     <section class="content">
@@ -23,11 +14,8 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <th>Placa:</th>
-                                <th><input type="text" class="form-control"
-                                           placeholder="Digite el número de la placa generada para el registro." id="placa"></th>
                                 <th>Identificación:</th>
-                                <td colspan="3">{{$registro->numero_identificacion}}</td>
+                                <td colspan="5">{{$registro->numero_identificacion}}</td>
                             </tr>
                             <tr>
                                 <th>Razón Social:</th>
@@ -87,24 +75,56 @@
                         </table>
                     </div>
                     <div class="box-header with-border" style="background-color: #d9d9d9; color: #ffffff;">
-                        DATOS ACTIVIDAD
+                        DATOS A CARGAR
                     </div>
                     <div class="box-body">
-                        <b>Actividad: </b>{{$actividad->codigo}}<br/>
-                        <b>Descripción: </b>{{$actividad->name}}<br/>
-                        <b>Tipo Actividad: </b>{{$tipo_act->name}}<br/>
+                        {!! Form::open(array('url' => 'indycom/editar_registro', 'method' => 'post', 'files' => 'yes', 'id' => 'formIndyCom')) !!}
+                        <div class="form-group">
+                            <label for="">* Fotocopia de la Cámara de Comercio: </label>
+                            <input type="file" class="form-control" name="camaracomercio" id="camaracomercio"
+                                   accept=".pdf"
+                                   onchange="validarExtension('camaracomercio', 'errorcarmaracomercio')">
+                            <span style="color: red;" id="errorcarmaracomercio"></span>
+                            <span style="color: red;" id="errorcarmaracomercio2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">* Fotocopia de la Cédula: </label>
+                            <input type="file" class="form-control" name="cedula" id="cedula" accept=".pdf"
+                                   onchange="validarExtension('cedula', 'errorcedula')">
+                            <span style="color: red;" id="errorcedula"></span>
+                            <span style="color: red;" id="errorcedula2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">* Fotocopia del Rut: </label>
+                            <input type="file" class="form-control" name="rut" id="rut" accept=".pdf"
+                                   onchange="validarExtension('rut', 'errorrut')">
+                            <span style="color: red;" id="errorrut"></span>
+                            <span style="color: red;" id="errorrut2"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="">* Fotocopia del Pago en Banco consignación $34350: </label>
+                            <input type="file" class="form-control" name="banco" id="banco" accept=".pdf"
+                                   onchange="validarExtension('banco', 'errorbanco')">
+                            <span style="color: red;" id="errorbanco"></span>
+                            <span style="color: red;" id="errorbanco2"></span>
+                        </div>
+                        {!! Form::close() !!}
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <input type="hidden" name="id" id="id" value="{{$registro->id}}">
                         <input type="hidden" name="url" id="url" value="{{URL::to('/')}}">
-                        <button class="btn btn-danger pull-left" id="cancel"><i class="fa fa-close"></i> Cancelar</button>
-                        <button class="btn btn-success pull-right" id="enviar" onclick="enviarDatos()"><i class="fa fa-send"></i> Enviar</button>
+                        <a href="{{URL::to('/')}}" class="btn btn-danger pull-left" id="cancel"><i
+                                    class="fa fa-close"></i> Cancelar
+                        </a>
+                        <button class="btn btn-success pull-right" id="enviar" onclick="enviarDatosEditar()"><i
+                                    class="fa fa-send"></i> Enviar
+                        </button>
                     </div>
                 </div>
 
             </div>
         </div>
     </section>
-    <script src="{{URL::to('js/script_validacion_registro.js')}}"></script>
+    <script src="{{URL::to('js/script_form_indycom.js')}}"></script>
 @endsection

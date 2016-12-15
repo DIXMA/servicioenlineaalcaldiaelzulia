@@ -111,6 +111,7 @@ class ApiController extends Controller
         $naturalezajuridica = Input::get('naturalezajuridica');
         $numero = Input::get('numero');
         $nombres = Input::get('nombres');
+        $nombre_comercial = Input::get('nombre_comercial');
         $direccion = Input::get('direccion');
         $actividadeconomica = explode('_', Input::get('actividadeconomica'))[1];
         $direccionestablecimiento = Input::get('direccionestablecimiento');
@@ -126,7 +127,7 @@ class ApiController extends Controller
         $email = Input::get('email');
         $registro = RegistroIndycom::where('numero_identificacion', '=', $numero)->first();
         if (!$registro) {
-            if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $matricula && $fecha_matricula && $camaracomercio && $cedula && $rut && $banco && $email) {
+            if ($tipotramite && $tipodocumento && $fecha && $naturalezajuridica && $numero && $nombres && $direccion && $actividadeconomica && $direccionestablecimiento && $tipoactividad && $telefono && $regimen && $matricula && $fecha_matricula && $camaracomercio && $cedula && $rut && $banco && $email && $nombre_comercial) {
                 $registro = new RegistroIndycom();
                 $registro->estado = 'Pendiente';
                 $registro->email = $email;
@@ -136,6 +137,7 @@ class ApiController extends Controller
                 $registro->numero_identificacion = $numero;
                 $registro->naturaleza_juridica = $naturalezajuridica;
                 $registro->razon_social = $nombres;
+                $registro->nombre_comercial = $nombre_comercial;
                 $registro->direccion_notificacion = $direccion;
                 $registro->actividad_economica = $actividadeconomica;
                 $registro->direccion_establecimiento = $direccionestablecimiento;
@@ -228,50 +230,139 @@ class ApiController extends Controller
                     $obs_documento,
                     $obs_camaradecomercio,
                     $obs_rut,
-                    $obs_banco, $url, $id),
+                    $obs_banco, $url, $id_c),
                 $registro->email
             );
         }
         return redirect()->back()->with("mensaje", "Se ha validado el registro como {$estado}, se ha enviado por email, las observaciones generadas, para que el usuario las subsane.");
     }
 
+    /**
+     * Función que muestra los datos del registro para agregar la placa y enviar por email
+     * @param $id Identificador del registro
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     function mailValidacion($id)
     {
         $id2 = decrypt($id);
         $registro = RegistroIndycom::findOrFail($id2);
+        $actividad = ActividadEconomica::findOrFail($registro->tipo_actividad);
+        $tipo_actividad = TipoActividadEconomica::findOrFail($actividad->tipo_actividad);
         if ($registro) {
-            $user = User::findOrFail($registro->user_id);
-            return view('indycom.admin.send_mail', ['id' => $id, 'email' => $user->email]);
+            return view('indycom.admin.send_mail', ['id' => $id, 'registro' => $registro, 'actividad' => $actividad, 'tipo_act' => $tipo_actividad]);
         }
         return redirect()->back()->with('error', "No se reconoce la información, por favor intentelo de nuevo.");
     }
 
-    function enviarMailValidacion()
+    /**
+     * Funcion que guarada la informacion de la placa del registro validado, y notifica por correo al usuario del hecho, indicandole la url de descarga del certificado
+     * @return string
+     */
+    function enviarValidacion()
     {
-        $id = decrypt(Input::get('id'));
-        $asunto = Input::get('asunto');
-        $mensaje = Input::get('mensaje');
-        if (!$asunto) {
-            $asunto = "Validación registro Industria y Comercio";
+        $id = Input::get('id');
+        $url = Input::get('url');
+        $placa = Input::get('placa');
+        if ($id && $url && $placa) {
+            $registro = RegistroIndycom::findOrFail($id);
+            $registro->placa = $placa;
+            $registro->save();
+            $this->enviarMail(
+                'Certificado Inscripción Camara de Comercio',
+                $this->getMensajeValidacionPlaca('Certificado Inscripción Camara de Comercio', $url, $id),
+                $registro->email
+            );
+            return json_encode(array('estado' => 'ok', 'mensaje' => 'Se ha almacenado la información y se ha notificado por correo al usuario.'));
+        } else {
+            return json_encode(array('estado' => 'fail', 'mensaje' => 'Ha ocurrido un error interno, verifique e intentelo de nuevo.'));
         }
+    }
+
+    /**
+     * Función que muestra los registros validados.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    function registrosValidados()
+    {
+        if (Auth::check()) {
+            $registros = DB::table('indycom_registro')
+                ->join('indycom_tipotramite', 'indycom_tipotramite.id', '=', 'indycom_registro.tipo_tramite')
+                ->join('indycom_actividadeconomica', 'indycom_actividadeconomica.id', '=', 'indycom_registro.actividad_economica')
+                ->join('indycom_tipoactividadeconomica', 'indycom_tipoactividadeconomica.id', '=', 'indycom_registro.tipo_actividad')
+                ->where('indycom_registro.estado', 'LIKE', 'Validado')
+                ->select(
+                    'indycom_registro.id', 'indycom_registro.estado', 'indycom_registro.tipo_tramite as tipo_tramite_id', 'indycom_tipotramite.name as tipo_tramite_name', 'indycom_registro.fecha as fecha_registro', 'indycom_registro.tipo_documento', 'indycom_registro.numero_identificacion', 'indycom_registro.naturaleza_juridica', 'indycom_registro.razon_social', 'indycom_registro.direccion_notificacion', 'indycom_registro.actividad_economica as actividad_economica_id', 'indycom_actividadeconomica.name as actividad_economica_name', 'indycom_registro.direccion_establecimiento', 'indycom_registro.tipo_actividad as tipo_actividad_id', 'indycom_tipoactividadeconomica.name as tipo_actividad_name', 'indycom_registro.telefono', 'indycom_registro.regimen', 'indycom_registro.url_documento', 'indycom_registro.url_camaracomercio', 'indycom_registro.url_rut'
+                )
+                ->paginate(8);
+            $cant_regP = count(RegistroIndycom::where('estado', 'LIKE', 'Pendiente')->get());
+            $cant_regV = count(RegistroIndycom::where('estado', 'LIKE', 'Validado')->get());
+            $cant_regO = count(RegistroIndycom::where('estado', 'LIKE', 'Observaciones')->get());
+            return view('indycom.admin.registrosvalidados', ['registros' => $registros, 'cant_pendientes' => $cant_regP, 'cant_validados' => $cant_regV, 'cant_observaciones' => $cant_regO]);
+        }
+        return redirect('/')->with('error', 'Debe estar autenticado para acceder a está página.');
+    }
+
+    /**
+     * Función que muestra en pdf los datos de registro de industria y comercio
+     * @param $id Identificador de registro en industria y comercio
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    function indycomPDF($id)
+    {
         $registro = RegistroIndycom::findOrFail($id);
-        $observaciones = ObservacionRegistro::where('registro_id', '=', $id)->first();
-        $user = User::findOrFail($registro->user_id);
-        $email = $user->email;
-        $general = $observaciones->observacion_general;
-        $documento = $observaciones->observacion_cedula;
-        $rut = $observaciones->observacion_rut;
-        $camcom = $observaciones->observacion_camaracomercio;
-        $estado = $observaciones->estado;
+        if ($registro) {
+            $actividad = ActividadEconomica::findOrFail($registro->tipo_actividad);
+            $tipo_actividad = TipoActividadEconomica::findOrFail($actividad->tipo_actividad);
+            $dia = date("d");
+            $mes = date("m");
+            $ano = date("Y");
+            return PDF::loadView(
+                'pdf.certificado_inycom',
+                array(
+                    'registro' => $registro,
+                    'dia' => $dia,
+                    'mes' => $mes,
+                    'ano' => $ano,
+                    'actividad' => $actividad,
+                    'tipo_act' => $tipo_actividad
+                ))->setPaper('a4', '')->stream('certificado.pdf');
+        }
+        return redirect('/')->with('error', 'No se reconoce la informacion, verifique e intentelo de nuevo.');
+    }
 
+    /**
+     * Función que muestra los registros que tienen observaciones en el sistema
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    function registrosObservaciones()
+    {
+        if (Auth::check()) {
+            $registros = DB::table('indycom_registro')
+                ->join('indycom_tipotramite', 'indycom_tipotramite.id', '=', 'indycom_registro.tipo_tramite')
+                ->join('indycom_actividadeconomica', 'indycom_actividadeconomica.id', '=', 'indycom_registro.actividad_economica')
+                ->join('indycom_tipoactividadeconomica', 'indycom_tipoactividadeconomica.id', '=', 'indycom_registro.tipo_actividad')
+                ->where('indycom_registro.estado', 'LIKE', 'Observaciones')
+                ->select(
+                    'indycom_registro.id', 'indycom_registro.estado', 'indycom_registro.tipo_tramite as tipo_tramite_id', 'indycom_tipotramite.name as tipo_tramite_name', 'indycom_registro.fecha as fecha_registro', 'indycom_registro.tipo_documento', 'indycom_registro.numero_identificacion', 'indycom_registro.naturaleza_juridica', 'indycom_registro.razon_social', 'indycom_registro.direccion_notificacion', 'indycom_registro.actividad_economica as actividad_economica_id', 'indycom_actividadeconomica.name as actividad_economica_name', 'indycom_registro.direccion_establecimiento', 'indycom_registro.tipo_actividad as tipo_actividad_id', 'indycom_tipoactividadeconomica.name as tipo_actividad_name', 'indycom_registro.telefono', 'indycom_registro.regimen', 'indycom_registro.url_documento', 'indycom_registro.url_camaracomercio', 'indycom_registro.url_rut'
+                )
+                ->paginate(8);
+            $cant_regP = count(RegistroIndycom::where('estado', 'LIKE', 'Pendiente')->get());
+            $cant_regV = count(RegistroIndycom::where('estado', 'LIKE', 'Validado')->get());
+            $cant_regO = count(RegistroIndycom::where('estado', 'LIKE', 'Observaciones')->get());
+            return view('indycom.admin.registrosobservaciones', ['registros' => $registros, 'cant_pendientes' => $cant_regP, 'cant_validados' => $cant_regV, 'cant_observaciones' => $cant_regO]);
+        }
+        return redirect('/')->with('error', 'Debe estar autenticado para acceder a está página.');
+    }
 
-        /*Mail::send("emails.email_template", ['titulo' => $asunto, 'contenido' => $mensaje, 'email' => $email, 'general' => $general, 'documento' => $documento, 'rut' => $rut, 'camcom' => $camcom, 'estado' => $estado], function ($messaje) use ($asunto, $mensaje, $email, $general, $documento, $rut, $camcom, $estado) {
-            $messaje->to($email, '')
-                ->from('contacto.alcaldielzuliands@gmail.com', 'Contacto AlcaldiaElZulia')
-                ->subject($asunto);
-        });*/
-
-        return redirect('admin_indycom/registros')->with('mensaje', 'Se ha notificado al usuario.');
+    function editarRegistroIndycom($id)
+    {
+        $registro = RegistroIndycom::findOrFail($id);
+        if ($registro) {
+            $actividad = ActividadEconomica::findOrFail($registro->tipo_actividad);
+            $tipo_actividad = TipoActividadEconomica::findOrFail($actividad->tipo_actividad);
+            return view('indycom.web.editar_form_inscripcion', ['registro' => $registro, 'actividad' => $actividad, 'tipo_act' => $tipo_actividad]);
+        }
+        return redirect('/')->with('error', 'No se encuentra la ifnromación necesaria para realizar el proceso, por favor verifique e intentelo de nuevo.');
     }
 
     /****************************************************************************************************************
@@ -285,7 +376,8 @@ class ApiController extends Controller
      * @param $tipo Tipo de archivo que se sube - nombre
      * @return string Ruta donde se almacena el archivo.
      */
-    protected function subir_archivo($archivo, $id, $tipo)
+    protected
+    function subir_archivo($archivo, $id, $tipo)
     {
         $nombre = $archivo->getClientOriginalName();
         $extension = explode('.', $nombre);
@@ -302,7 +394,8 @@ class ApiController extends Controller
      * @param $contenido Contenido del email
      * @return string Html completo para el email enviado
      */
-    protected function getMensajeHTMLregistroIndyCom($titulo, $contenido)
+    protected
+    function getMensajeHTMLregistroIndyCom($titulo, $contenido)
     {
         $msj = "<h1> $titulo </h1><br/>";
         $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
@@ -312,18 +405,45 @@ class ApiController extends Controller
         return $msj;
     }
 
-    protected function  getMensajeHTMLvalidacionPendienteIndyCom($titulo, $contenido, $obsG, $obsD, $obsCm, $obsR, $obsB, $url, $id)
+    /**
+     * Función que devuelve el html del contenido de mensaje de notificacion para una validacion de inscripcion como pendiente
+     * @param $titulo Titulo del mensaje
+     * @param $contenido Contenido del mensaje
+     * @param $obsG Observaciones generales obtenidas
+     * @param $obsD Observaciones del adjunto Documento de Identidad
+     * @param $obsCm Observaciones del adjunto camara de comercio
+     * @param $obsR Observaciones del adjunto rut
+     * @param $obsB Observaciones del adjunto pago en el banco
+     * @param $url Url del dominio para crear el link de descarga del certificado
+     * @param $id Identificador encriptado del registro
+     * @return string
+     */
+    protected
+    function getMensajeHTMLvalidacionPendienteIndyCom($titulo, $contenido, $obsG, $obsD, $obsCm, $obsR, $obsB, $url, $id)
     {
-        $idC = crypt($id);
-        $msj = "<h1> $titulo </h1>";
-        $msj .= "<br/>";
-        $msj .= "<h3 style='text-aling: justify;'>$contenido</h3>";
+        $msj = "<h3 style='text-aling: justify;'>$contenido</h3>";
         $msj .= "<h2>Observaciones Generales: </h2><p>$obsG</p>";
         $msj .= "<h2>Observaciones del Adjunto de Documento de Identidadc: </h2><p>$obsD</p>";
         $msj .= "<h2>Observaciones del Adjunto Cámara de Comercio: </h2><p>$obsCm</p>";
         $msj .= "<h2>Observaciones del Adjunto RUT: </h2><p>$obsR</p>";
-        $msj .= "<h2>Observaciones del Adjunto Pago en Banco: </h2><p>$obsB</p>";
-        $msj .= 'Para realizar el proceso de correcciónes, puede acceder haciendo <a href="'.$url.'indycom/editar/'.$idC.' target="_blank">clic aquí.</a>';
+        $msj .= "<h2>Observaciones del Adjunto Pago en Banco: </h2><p>$obsB</p><br/>";
+        $msj .= '<b>Para realizar el proceso de correcciónes, puede acceder haciendo</b> <a href="' . $url . '/indycom/editar/' . decrypt($id) . '" target="_blank">clic aquí.</a>';
+        $msj .= "<br/>";
+        return $msj;
+    }
+
+    /**
+     * Función que devuelve en HTML la estructura del contenido del correo que se envia al usuario informando el certificado del proceso
+     * @param $titulo Título del email
+     * @param $url Url del dominio para crear el link de descarga del certificado
+     * @param $id Identificador del registro
+     * @return string
+     */
+    protected
+    function getMensajeValidacionPlaca($titulo, $url, $id)
+    {
+        $msj = "<h3 style='text-aling: justify;'>Se ha validado el registro hecho en Industria y comercio, a continuación puede descargar el certificado.</h3>";
+        $msj .= 'Para descargar el certificado, puede hacerlo dando <a href="' . $url . '/indycom/certificado/' . $id . ' target="_blank">clic aquí.</a>';
         $msj .= "<br/>";
         $msj .= "<h3>Nota:</h3>";
         $msj .= "<h5>Este correo es enviado a través de los servicios en línea de la Alcaldía de el Zulia.</h5>";
@@ -339,7 +459,8 @@ class ApiController extends Controller
      * @return string Ok
      * @throws \phpmailerException Excepciones que se capturan al no poder enviar el correo
      */
-    protected function enviarMail($titulo, $contenido, $email)
+    protected
+    function enviarMail($titulo, $contenido, $email)
     {
         $mail = new \PHPMailer(true); // notice the \  you have to use root namespace here
         try {

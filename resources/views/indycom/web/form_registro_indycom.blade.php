@@ -64,6 +64,10 @@
                                 <span style="color: red;" id="errornombres"></span>
                             </div>
                             <div class="form-group">
+                                <label for="nombre_comercial">* Nombre Comercial: </label>
+                                <input class="form-control" name="nombre_comercial" id="nombre_comercial" placeholder="Digite el nombre comercial del establecimiento">
+                            </div>
+                            <div class="form-group">
                                 <label for="direccion">* Dirección de Notificación: </label>
                                 <input type="text" class="form-control" name="direccion" id="direccion" required="true"
                                        placeholder="Apellidos y Nombres o Razón Social">

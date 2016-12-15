@@ -16,12 +16,12 @@
                     </div>
                     <div class="box-body no-padding">
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="#"><i class="fa fa-inbox"></i> Pendientes <span
+                            <li class="active"><a href="{{URL::to('admin_indycom/registros')}}"><i class="fa fa-inbox"></i> Pendientes <span
                                             class="label label-primary pull-right">{{$cant_pendientes}}</span></a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i> Validados <span
+                            <li><a href="{{URL::to('indycom/registros/validados')}}"><i class="fa fa-check"></i> Validados <span
                                             class="label label-success pull-right">{{$cant_validados}}</span></a></li>
                             </a></li>
-                            <li><a href="#"><i class="fa fa-question-circle"></i> Observaciones <span
+                            <li><a href="{{URL::to('indycom/registros/observciones')}}"><i class="fa fa-question-circle"></i> Observaciones <span
                                             class="label label-warning pull-right">{{$cant_observaciones}}</span></a></li>
                         </ul>
                     </div>
@@ -46,7 +46,7 @@
                                 @if(count($registros) > 0)
                                     @foreach($registros as $r)
                                         <tr>
-                                            <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a>
+                                            <td class="mailbox-star"><a href="#"><i class="fa fa-star text-blue"></i></a>
                                             </td>
                                             <td class="mailbox-name">
                                                 <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg"

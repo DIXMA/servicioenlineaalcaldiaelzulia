@@ -174,4 +174,8 @@ function enviarForm(url) {
     }
 }
 
+function enviarDatosEditar(){
+    alert("YEah");
+}
+
 
