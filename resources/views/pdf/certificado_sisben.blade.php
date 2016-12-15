@@ -2,27 +2,44 @@
 <head>
     <title>Certificado Sisben</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="{{URL::to('web_theme/bootstrap/css/bootstrap.min.css')}}">
+<!-- <link rel="stylesheet" href="{{URL::to('web_theme/bootstrap/css/bootstrap.min.css')}}">-->
+    <style type="text/css">
 
+        table {
+            font-family: Arial, Helvetica, sans-serif;
+            border: 1px solid;
+            border-color: #ddd;
+        }
+
+        td {
+            border: 1px solid;
+            border-color: #ddd;
+        }
+
+        th{
+            border: 1px solid;
+            border-color: #ddd;
+        }
+
+    </style>
 </head>
 <body>
 <div class="row">
     <div>
-        <img src="{{URL::to('img/sisben.png')}}" style="width: 25%;">
+        <img src="{{URL::to('img/sisben.png')}}" style="width: 20%;">
     </div>
     <div style="text-align: right; position: fixed;">
-        <img src="{{URL::to('img/escudo.jpg')}}" style="width: 13%;">
+        <img src="{{URL::to('img/escudo.jpg')}}" style="width: 10%;">
     </div>
 
     <center>
-        <h3 style="font-family: Impact, Helvetica, Arial, sans-serif;">
+        <h4 style="font-family: Impact, Helvetica, Arial, sans-serif;">
             <b>República de Colombia<br/>
                 Departamento Norte de Santander<br/>
                 Municipio de El Zulia</b>
-        </h3>
-        <br/><br/>
-        <h4 style="font-family: Impact, Helvetica, Arial, sans-serif;"><b>EL COORDINADOR MUNICIPAL DEL SISBEN</b></h4>
-        <h4 style="font-family: Impact, Helvetica, Arial, sans-serif;"><b>CERTIFICA</b></h4>
+        </h4>
+        <h5 style="font-family: Impact, Helvetica, Arial, sans-serif;"><b>EL COORDINADOR MUNICIPAL DEL SISBEN</b></h5>
+        <h5 style="font-family: Impact, Helvetica, Arial, sans-serif;"><b>CERTIFICA</b></h5>
     </center>
 
     <p style="text-align: justify; padding-left: 8px; padding-right: 8px;">
@@ -33,7 +50,6 @@
     </p>
     <div style="padding-left: 40px; padding-right: 40px;">
         <table class="table table-bordered">
-            <thead>
             <tr>
                 <th>Tipo Doc</th>
                 <th>Documento</th>
@@ -45,8 +61,6 @@
                 <th>Ficha</th>
                 <th>Puntaje Sisben</th>
             </tr>
-            </thead>
-            <tbody>
             <tr>
                 @if($user->tipo_documento == 1)
                     <td>Cédula de Ciudadanía</td>
@@ -78,7 +92,6 @@
                 <td>{{$user->ficha}}</td>
                 <td>13</td>
             </tr>
-            </tbody>
         </table>
     </div>
     <p style="padding-left: 40px; padding-right: 40px;">

@@ -18,3 +18,38 @@ function consultar(url) {
     }
 }
 
+function validarExtension(id, error) {
+    var val = $("#" + id).val();
+
+    var ext = (val.substring(val.lastIndexOf("."))).toLowerCase();
+    if (ext !== '.csv') {
+        var input = $('#' + id);
+        var clon = input.clone();
+        input.replaceWith(clon);
+        $("#" + error).text("El archivo que intenta cargar no es un PDF, verifique e intentelo de nuevo.").show().fadeOut(8000);
+    } else {
+        $("#" + error).text("");
+    }
+}
+
+function ejecutar(url) {
+    //alert("¡Atención!\n Vamos a iniciar el proceso de carga esto tardará un tiempo, por favor espera pacientemente, ");
+    $("#boton").attr('disabled', 'true');
+    $("#sisben").attr('disabled', 'true');
+    var mostrar = '<div class="info-box bg-yellow">';
+    mostrar += '<span class="info-box-icon"><img src="'+url+'" style="50%;"></span>';
+    mostrar += '<div class="info-box-content">';
+    mostrar += '<span class="info-box-text">Los datos se estan cargando</span>';
+    mostrar += '<span class="info-box-number">Esto tomará un tiempo, por favor espera pacientemente. POR FAVOR NO RECARGUE LA PAGINA NI ACCEDA A OTRO LINK, ESTO OCASIONARA QUE SE CANCELE EL PROCESO.</span>';
+    mostrar += '<div class="progress">';
+    mostrar += '<div class="progress-bar" style="width: 70%"></div>';
+    mostrar += '</div>';
+    mostrar += '<span class="progress-description">';
+    mostrar += 'Estamos avanzando en el proeceso';
+    mostrar += '</span>';
+    mostrar += '</div>';
+    mostrar += '</div>';
+    $("#campos").html(mostrar);
+    $("#formSisbenAct").submit();
+}
+

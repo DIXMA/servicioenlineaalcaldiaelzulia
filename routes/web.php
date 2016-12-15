@@ -76,3 +76,11 @@ Route::get('indycom/editar/{id}', array(
 Route::post('indycom/editar', array(
     'uses' => 'ApiController@editarIndycom'
 ));
+
+Route::get('sisben/actualizar', array(
+    'uses' => 'ApiController@actualizarSisben'
+));
+
+Route::post('sisben/subir', array(
+    'uses' => 'ApiController@subirSisben'
+));

@@ -15,6 +15,7 @@ use \Illuminate\Support\Facades\DB;
 use App\Modelos\ObservacionRegistro;
 use \App\Modelos\Sisben;
 use Barryvdh\DomPDF\Facade as PDF;
+use Mockery\CountValidator\Exception;
 
 class ApiController extends Controller
 {
@@ -370,6 +371,10 @@ class ApiController extends Controller
         return redirect('/')->with('error', 'No se encuentra la ifnromación necesaria para realizar el proceso, por favor verifique e intentelo de nuevo.');
     }
 
+    /**
+     * Funcion que edita la inforacion de los archivos de un registro indycom
+     * @return \Illuminate\Http\RedirectResponse
+     */
     function editarIndycom()
     {
         $id = Input::get('id');
@@ -411,6 +416,98 @@ class ApiController extends Controller
             }
         }
         return redirect('/')->with('error', 'No se ha encontrado la información necesaria para ejecutar la acción, por favor verifique e intentelo de nuevo.');
+    }
+
+    /**
+     * Función que muestra el formulario para subir el archivo csv para actualizar en la base de datos
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    function actualizarSisben()
+    {
+        if (Auth::check()) {
+            return view('indycom.admin.subir_sisben');
+        }
+        return redirect('/')->with('error', 'No tiene permisos para acceder a esta acción.');
+    }
+
+    function subirSisben()
+    {
+        try {
+            if (Auth::check()) {
+
+
+                ini_set('max_execution_time', 900); //300 seconds = 5 minutes
+                //obtenemos el archivo .csv
+                //$tipo = $_FILES['archivo']['type'];
+
+                //$tamanio = $_FILES['archivo']['size'];
+
+                $archivotmp = $_FILES['archivo']['tmp_name'];
+
+                //cargamos el archivo
+                $lineas = file($archivotmp);
+
+                //inicializamos variable a 0, esto nos ayudará a indicarle que no lea la primera línea
+                $i = 0;
+                $j = 0;
+
+                //Recorremos el bucle para leer línea por línea
+                foreach ($lineas as $linea_num => $linea) {
+                    //abrimos bucle
+                    /*si es diferente a 0 significa que no se encuentra en la primera línea
+                    (con los títulos de las columnas) y por lo tanto puede leerla*/
+                    if ($i != 0) {
+                        //abrimos condición, solo entrará en la condición a partir de la segunda pasada del bucle.
+                        /* La funcion explode nos ayuda a delimitar los campos, por lo tanto irá
+                        leyendo hasta que encuentre un ; */
+                        $datos = explode(";", $linea);
+
+                        //Almacenamos los datos que vamos leyendo en una variable
+                        $ficha = trim($datos[0]);
+                        $hogar = trim($datos[1]);
+                        $apellidos1 = trim($datos[2]);
+                        $apellidos2 = trim($datos[3]);
+                        $nombre1 = trim($datos[4]);
+                        $nombre2 = trim($datos[5]);
+                        $genero = trim($datos[6]);
+                        $tipo_documento = trim($datos[7]);
+                        $numero_documento = trim($datos[8]);
+                        $puntaje = trim($datos[9]);
+
+                        $sisben = $this->sisbenByDoc($numero_documento);
+                        if (!$sisben) {
+                            $new_sisben = new Sisben();
+                            $new_sisben->ficha = $ficha;
+                            $new_sisben->hogar = $hogar;
+                            $new_sisben->apellidos1 = $apellidos1;
+                            $new_sisben->apellidos2 = $apellidos2;
+                            $new_sisben->nombre1 = $nombre1;
+                            $new_sisben->nombre2 = $nombre2;
+                            $new_sisben->genero = $genero;
+                            $new_sisben->tipo_documento = $tipo_documento;
+                            $new_sisben->numero_documento = $numero_documento;
+                            $new_sisben->puntaje = $puntaje;
+                            $new_sisben->save();
+                            $j++;
+                        }
+
+                        //guardamos en base de datos la línea leida
+
+                        //cerramos condición
+                    }
+
+                    /*Cuando pase la primera pasada se incrementará nuestro valor y a la siguiente pasada ya
+                    entraremos en la condición, de esta manera conseguimos que no lea la primera línea.*/
+                    $i++;
+                    //cerramos bucle
+                }
+                return redirect()->back()->with('mensaje', "Se han actualizado {$j} registros de  {$i} leidos en la Base de datos del Sisben, por favor verifique con el archivo si es consecuente, de lo contrario vuelva a cargarlo.");
+
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->with('mensaje', "Ha pasado mucho tiempo, tuvimos que detener el proceso para no ocasionar daños severos en el servidor, ahora llevamos leidos {$i} registros y almacenasdos {$j}, por favor verifique si hacen falta, de ser así, vualva a cargar el archivo.");
+        }
+        return redirect('/')->with('error', 'No tiene permisos para realizar esta acción.');
     }
 
     /****************************************************************************************************************
@@ -532,5 +629,11 @@ class ApiController extends Controller
         }
         return 'ok';
     }
+
+    protected function sisbenByDoc($doc)
+    {
+        return Sisben::where('numero_documento', '=', $doc)->first();
+    }
+
 
 }
