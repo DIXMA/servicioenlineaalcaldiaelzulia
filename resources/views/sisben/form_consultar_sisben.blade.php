@@ -45,6 +45,14 @@
                                     <input type="text" name="documento" id="documento" value="" class="form-control" placeholder="Digite el número de documento a consultar.">
                                 </div>
                                 <div class="form-group">
+                                    <label>Seleccione el tipo de certificado que desea generar:</label>
+                                    <select class="form-control" id="tipo">
+                                        <option value="x">- Seleccione una Opción -</option>
+                                        <option value="1">Certificado Personal</option>
+                                        <option value="2">Certificado Núcleo Familiar</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <center>
                                         <button class="btn btn-lg btn-info" onclick="consultar('{{URL::to("/")}}')"><i class="fa fa-search"> </i> Consultar</button>
                                     </center>
@@ -64,5 +72,6 @@
         </div>
     </div>
 </section>
+
 <script src="{{URL::to('js/script_sisben.js')}}"></script>
 @endsection

@@ -1,6 +1,8 @@
 function consultar(url) {
     var doc = $("#documento").val();
-    if (doc) {
+    var tipo_doc = $("#tipo_doc").val();
+    var tipo = $("#tipo").val();
+    if (doc && tipo && tipo_doc) {
         $("#result").html("<center><i class='fa fa-spinner'></i>Consultando...</center>");
         $.ajax({
             method: "get",
@@ -8,13 +10,13 @@ function consultar(url) {
         }).done(function (msg) {
             //alert(msg.numero_documento);
             if(msg){
-                $("#result").html("Se encuentra un registro a nombre de: <b>"+msg.nombre1+" "+msg.nombre2+" "+msg.apellidos1+" "+msg.apellidos2+"</b><br/><a href='"+url+"/sisben/certificado/"+doc+"' target='_blank'>PDF</a>");
+                $("#result").html("Se encuentra un registro a nombre de: <b>"+msg.nombre1+" "+msg.nombre2+" "+msg.apellidos1+" "+msg.apellidos2+"</b><br/><center><a href='"+url+"/sisben/certificado/"+doc+"' target='_blank' class='btn btn-lg btn-success'><i class='fa fa-file-pdf-o'></i> PDF</a></center>");
             }else{
                 $("#result").html("<p class='bg-danger'>No se encuentra un registro en la Base local del SISBEN con el número de documento indicado.</p>");
             }            
         });
     }else{
-        alert("Debe digitar un número de documento.");
+        alert("Debe digitar todos los datos.");
     }
 }
 
@@ -35,7 +37,7 @@ function validarExtension(id, error) {
 function ejecutar(url) {
     //alert("¡Atención!\n Vamos a iniciar el proceso de carga esto tardará un tiempo, por favor espera pacientemente, ");
     $("#boton").attr('disabled', 'true');
-    $("#sisben").attr('disabled', 'true');
+    $("#archivo").attr('disabled', 'true');
     var mostrar = '<div class="info-box bg-yellow">';
     mostrar += '<span class="info-box-icon"><img src="'+url+'" style="50%;"></span>';
     mostrar += '<div class="info-box-content">';
@@ -50,6 +52,6 @@ function ejecutar(url) {
     mostrar += '</div>';
     mostrar += '</div>';
     $("#campos").html(mostrar);
-    $("#formSisbenAct").submit();
+    //$("#formSisbenAct").submit();
 }
 

@@ -432,11 +432,10 @@ class ApiController extends Controller
 
     function subirSisben()
     {
+        ini_set('max_execution_time', 3000); //300 seconds = 5 minutes
         try {
             if (Auth::check()) {
 
-
-                ini_set('max_execution_time', 900); //300 seconds = 5 minutes
                 //obtenemos el archivo .csv
                 //$tipo = $_FILES['archivo']['type'];
 

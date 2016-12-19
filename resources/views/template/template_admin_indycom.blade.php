@@ -92,6 +92,7 @@
                     <ul class="sidebar-menu">
                         <li class="header">Menú Principal</li>    
                         <li><a href="{{URL::to('admin_indycom/registros')}}"><i class="fa fa-list"></i> <span>Registros Industria Comercio</span></a></li>
+                        <li><a href="{{URL::to('sisben/actualizar')}}"><i class="fa fa-cloud-upload"></i> <span>Actualizar SISBEN</span></a></li>
                         <li><a href="{{URL::to('logout')}}"><i class="fa fa-minus-circle"></i> Cerrar Sesión</a></li>
                     </ul>
                 </section>
