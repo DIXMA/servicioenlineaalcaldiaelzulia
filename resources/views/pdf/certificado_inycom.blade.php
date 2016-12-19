@@ -12,7 +12,6 @@
             padding-left: 1%;
             padding-top: 1%;
             padding-bottom: 1%;
-            font-family: Arial, Helvetica, sans-serif;
             font-weight: bold;
         }
 
@@ -20,12 +19,11 @@
             border: 2px solid;
             border-color: #ddd;
             border-radius: 5%;
-            font-family: Arial, Helvetica, sans-serif;
             padding: 2% 2% 2% 2%;
         }
 
         .table {
-            font-family: Arial, Helvetica, sans-serif;
+
         }
 
         td {
@@ -39,7 +37,7 @@
 <div style="position: fixed;">
     <img src="{{URL::to('img/escudo.jpg')}}" style="width: 15%;">
 </div>
-<div style="padding-left: 10%; font-family: Arial, Helvetica, sans-serif;">
+<div style="padding-left: 10%;">
     <center>
         <h2>REGISTRO DE INSCRIPCION DE INDUSTRIA Y COMERCIO</h2>
         <h4>ALCALDÍA MUNICIPAL DE ZULIA</h4>

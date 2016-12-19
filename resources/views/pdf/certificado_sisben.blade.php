@@ -2,11 +2,9 @@
 <head>
     <title>Certificado Sisben</title>
     <!-- Latest compiled and minified CSS -->
-<!-- <link rel="stylesheet" href="{{URL::to('web_theme/bootstrap/css/bootstrap.min.css')}}">-->
     <style type="text/css">
 
         table {
-            font-family: Arial, Helvetica, sans-serif;
             border: 1px solid;
             border-color: #ddd;
         }
@@ -33,13 +31,13 @@
     </div>
 
     <center>
-        <h4 style="font-family: Impact, Helvetica, Arial, sans-serif;">
+        <h4>
             <b>República de Colombia<br/>
                 Departamento Norte de Santander<br/>
                 Municipio de El Zulia</b>
         </h4>
-        <h5 style="font-family: Impact, Helvetica, Arial, sans-serif;"><b>EL COORDINADOR MUNICIPAL DEL SISBEN</b></h5>
-        <h5 style="font-family: Impact, Helvetica, Arial, sans-serif;"><b>CERTIFICA</b></h5>
+        <h5><b>EL COORDINADOR MUNICIPAL DEL SISBEN</b></h5>
+        <h5><b>CERTIFICA</b></h5>
     </center>
 
     <p style="text-align: justify; padding-left: 8px; padding-right: 8px;">
