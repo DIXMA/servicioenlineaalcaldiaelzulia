@@ -29,9 +29,9 @@ class ApiController extends Controller
      * @param $ced Documento a consultar
      * @return mixed Información obtenida de la BD
      */
-    function consultarSisben($ced)
+    function consultarSisben($ced, $tipo_doc, $tipo)
     {
-        $sisben = Sisben::where('numero_documento', '=', $ced)->first();
+        $sisben = Sisben::where('numero_documento', '=', $ced)->where('tipo_documento', '=', $tipo_doc)->first();
         return $sisben;
     }
 
@@ -40,13 +40,18 @@ class ApiController extends Controller
      * @param $id Número de documento consultado en la base de datos del SISBEN
      * @return mixed PDF
      */
-    function sisbenPDF($id)
+    function sisbenPDF($id, $tipo)
     {
-        $sisben = Sisben::where('numero_documento', '=', $id)->first();
+        if ($tipo == "2") {
+            $s = Sisben::where('numero_documento', '=', $id)->first();
+            $sisben = Sisben::where('ficha', '=', $s->ficha)->where('hogar', '=', $s->hogar)->get();
+        } else {
+            $sisben = Sisben::where('numero_documento', '=', $id)->first();
+        }
         $dia = date("d");
         $mes = date("m");
         $ano = date("Y");
-        return PDF::loadView('pdf.certificado_sisben', array('user' => $sisben, 'dia' => $dia, 'mes' => $mes, 'ano' => $ano))->setPaper('a4', 'landscape')->stream('certificado.pdf');
+        return PDF::loadView('pdf.certificado_sisben', array('tipo' => $tipo, 'user' => $sisben, 'dia' => $dia, 'mes' => $mes, 'ano' => $ano))->setPaper('a4', 'landscape')->stream('certificado.pdf');
     }
 
     /****************************************************************************************************************
@@ -629,7 +634,8 @@ class ApiController extends Controller
         return 'ok';
     }
 
-    protected function sisbenByDoc($doc)
+    protected
+    function sisbenByDoc($doc)
     {
         return Sisben::where('numero_documento', '=', $doc)->first();
     }

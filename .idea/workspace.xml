@@ -5,9 +5,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/script_sisben.js" afterPath="$PROJECT_DIR$/public/js/script_sisben.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/indycom/admin/subir_sisben.blade.php" afterPath="$PROJECT_DIR$/resources/views/indycom/admin/subir_sisben.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php" afterPath="$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" afterPath="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php" afterPath="$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <ignored path="alcaldiaelzuliands.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -9826,8 +9825,8 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="79" column="29" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="29" />
+            <state relative-caret-position="406">
+              <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -9836,47 +9835,49 @@
       <file leaf-file-name="ApiController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApiController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7157">
-              <caret line="434" column="70" selection-start-line="434" selection-start-column="70" selection-end-line="434" selection-end-column="70" />
+            <state relative-caret-position="278">
+              <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
               <folding>
                 <element signature="e#40#76#0#PHP" expanded="true" />
-                <marker date="1481901718565" expanded="true" signature="29158:29178" ph="..." />
-                <marker date="1481901718565" expanded="true" signature="30301:30321" ph="..." />
-                <marker date="1481901718565" expanded="true" signature="31430:31450" ph="..." />
+                <marker date="1482154702508" expanded="true" signature="29472:29492" ph="..." />
+                <marker date="1482154702508" expanded="true" signature="30615:30635" ph="..." />
+                <marker date="1482154702508" expanded="true" signature="31744:31764" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="subir_sisben.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/indycom/admin/subir_sisben.blade.php">
+      <file leaf-file-name="certificado_sisben.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-              <folding />
+            <state relative-caret-position="1018">
+              <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
+              <folding>
+                <element signature="n#style#0;n#p#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="form_consultar_sisben.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script_sisben.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="script_sisben.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/script_sisben.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+            <state relative-caret-position="68">
+              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
               <folding>
-                <marker date="1481899570558" expanded="true" signature="1845:1849" ph="..." />
-                <marker date="1481899570558" expanded="true" signature="2289:2299" ph="..." />
+                <marker date="1482155019800" expanded="true" signature="1972:1976" ph="..." />
+                <marker date="1482155019800" expanded="true" signature="2416:2426" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="form_consultar_sisben.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="50" column="55" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="56" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -9917,13 +9918,13 @@
         <option value="$PROJECT_DIR$/resources/views/indycom/web/editar_form_inscripcion.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/indycom/admin/send_mail.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/indycom/admin/subir_sisben.balde.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/template/template_admin_indycom.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/indycom/admin/subir_sisben.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php" />
-        <option value="$PROJECT_DIR$/public/js/script_sisben.js" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ApiController.php" />
+        <option value="$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php" />
+        <option value="$PROJECT_DIR$/public/js/script_sisben.js" />
       </list>
     </option>
   </component>
@@ -10036,10 +10037,74 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pdf" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alcaldiaelzuliands" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -10107,7 +10172,8 @@
       <workItem from="1481820964113" duration="10769000" />
       <workItem from="1481897800595" duration="3615000" />
       <workItem from="1482108879771" duration="12000" />
-      <workItem from="1482111681807" duration="38000" />
+      <workItem from="1482111681807" duration="259000" />
+      <workItem from="1482152417458" duration="2598000" />
     </task>
     <task id="LOCAL-00001" summary="Mailer">
       <created>1481656704761</created>
@@ -10172,18 +10238,25 @@
       <option name="project" value="LOCAL" />
       <updated>1481839729197</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Continuando con el sisben y acomdodando la consulta por nucleo familiar">
+      <created>1482111771489</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1482111771489</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42326000" />
+    <option name="totallyTimeSpent" value="45145000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22977346" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23381877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -10230,7 +10303,8 @@
     <MESSAGE value="Terinado proceso de INDYCOM" />
     <MESSAGE value="Terinado proceso de INDYCOM_2" />
     <MESSAGE value="Acomodando para carga masiva del siben" />
-    <option name="LAST_COMMIT_MESSAGE" value="Acomodando para carga masiva del siben" />
+    <MESSAGE value="Continuando con el sisben y acomdodando la consulta por nucleo familiar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continuando con el sisben y acomdodando la consulta por nucleo familiar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -10264,9 +10338,9 @@
           <caret line="105" column="20" selection-start-line="105" selection-start-column="20" selection-end-line="105" selection-end-column="20" />
           <folding>
             <element signature="e#40#76#0#PHP" expanded="true" />
-            <marker date="1481901718565" expanded="true" signature="29158:29178" ph="..." />
-            <marker date="1481901718565" expanded="true" signature="30301:30321" ph="..." />
-            <marker date="1481901718565" expanded="true" signature="31430:31450" ph="..." />
+            <marker date="1482154702508" expanded="true" signature="29472:29492" ph="..." />
+            <marker date="1482154702508" expanded="true" signature="30615:30635" ph="..." />
+            <marker date="1482154702508" expanded="true" signature="31744:31764" ph="..." />
           </folding>
         </state>
       </provider>
@@ -10528,25 +10602,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="20" column="30" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/pdf/certificado_inycom.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-831">
           <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="29" selection-start-line="79" selection-start-column="12" selection-end-line="79" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -10565,35 +10624,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApiController.php">
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7157">
-          <caret line="434" column="70" selection-start-line="434" selection-start-column="70" selection-end-line="434" selection-end-column="70" />
-          <folding>
-            <element signature="e#40#76#0#PHP" expanded="true" />
-            <marker date="1481901718565" expanded="true" signature="29158:29178" ph="..." />
-            <marker date="1481901718565" expanded="true" signature="30301:30321" ph="..." />
-            <marker date="1481901718565" expanded="true" signature="31430:31450" ph="..." />
-          </folding>
+        <state relative-caret-position="406">
+          <caret line="43" column="35" selection-start-line="43" selection-start-column="35" selection-end-line="43" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/script_sisben.js">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ApiController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
+        <state relative-caret-position="278">
+          <caret line="34" column="21" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
           <folding>
-            <marker date="1481899570558" expanded="true" signature="1845:1849" ph="..." />
-            <marker date="1481899570558" expanded="true" signature="2289:2299" ph="..." />
+            <element signature="e#40#76#0#PHP" expanded="true" />
+            <marker date="1482154702508" expanded="true" signature="29472:29492" ph="..." />
+            <marker date="1482154702508" expanded="true" signature="30615:30635" ph="..." />
+            <marker date="1482154702508" expanded="true" signature="31744:31764" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/sisben/form_consultar_sisben.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="67" column="17" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
+        <state relative-caret-position="307">
+          <caret line="50" column="55" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="56" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/pdf/certificado_sisben.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1018">
+          <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
+          <folding>
+            <element signature="n#style#0;n#p#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/script_sisben.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+          <folding>
+            <marker date="1482155019800" expanded="true" signature="1972:1976" ph="..." />
+            <marker date="1482155019800" expanded="true" signature="2416:2426" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

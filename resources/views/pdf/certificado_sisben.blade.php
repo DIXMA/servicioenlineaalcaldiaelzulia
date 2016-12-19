@@ -16,7 +16,7 @@
             border-color: #ddd;
         }
 
-        th{
+        th {
             border: 1px solid;
             border-color: #ddd;
         }
@@ -61,37 +61,73 @@
                 <th>Ficha</th>
                 <th>Puntaje Sisben</th>
             </tr>
-            <tr>
-                @if($user->tipo_documento == 1)
-                    <td>Cédula de Ciudadanía</td>
-                @elseif($user->tipo_documento == 2)
-                    <td>Tarjeta de Identidad</td>
-                @elseif($user->tipo_documento == 'CE')
-                    <td>Cédula de Extranjería</td>
-                @elseif($user->tipo_documento == 'PA')
-                    <td>Pasaporte</td>
-                @elseif($user->tipo_documento == '4')
-                    <td>Registro Civil</td>
-                @elseif($user->tipo_documento == 'NU')
-                    <td>No. Unico de Id. Personal</td>
-                @elseif($user->tipo_documento == 'AS')
-                    <td>Adulto sin Identificacion</td>
-                @elseif($user->tipo_documento == 'MS')
-                    <td>Menor sin Identificacion</td>
-                @endif
-                <td>{{$user->numero_documento}}</td>
-                <td>{{$user->nombre1}}</td>
-                <td>{{$user->nombre2}}</td>
-                <td>{{$user->apellidos1}}</td>
-                <td>{{$user->apellidos2}}</td>
-                @if($user->genero == 1)
-                    <td>Masculino</td>
-                @elseif($user->genero == 2)
-                    <td>Femenino</td>
-                @endif
-                <td>{{$user->ficha}}</td>
-                <td>13</td>
-            </tr>
+            @if($tipo == 1)
+                <tr>
+                    @if($user->tipo_documento == 1)
+                        <td>Cédula de Ciudadanía</td>
+                    @elseif($user->tipo_documento == 2)
+                        <td>Tarjeta de Identidad</td>
+                    @elseif($user->tipo_documento == 'CE')
+                        <td>Cédula de Extranjería</td>
+                    @elseif($user->tipo_documento == 'PA')
+                        <td>Pasaporte</td>
+                    @elseif($user->tipo_documento == '4')
+                        <td>Registro Civil</td>
+                    @elseif($user->tipo_documento == 'NU')
+                        <td>No. Unico de Id. Personal</td>
+                    @elseif($user->tipo_documento == 'AS')
+                        <td>Adulto sin Identificacion</td>
+                    @elseif($user->tipo_documento == 'MS')
+                        <td>Menor sin Identificacion</td>
+                    @endif
+                    <td>{{$user->numero_documento}}</td>
+                    <td>{{$user->nombre1}}</td>
+                    <td>{{$user->nombre2}}</td>
+                    <td>{{$user->apellidos1}}</td>
+                    <td>{{$user->apellidos2}}</td>
+                    @if($user->genero == 1)
+                        <td>Masculino</td>
+                    @elseif($user->genero == 2)
+                        <td>Femenino</td>
+                    @endif
+                    <td>{{$user->ficha}}</td>
+                    <td>{{$user->puntaje}}</td>
+                </tr>
+            @elseif($tipo == 2)
+                @foreach($user as $user)
+                    <tr>
+                        @if($user->tipo_documento == 1)
+                            <td>Cédula de Ciudadanía</td>
+                        @elseif($user->tipo_documento == 2)
+                            <td>Tarjeta de Identidad</td>
+                        @elseif($user->tipo_documento == 'CE')
+                            <td>Cédula de Extranjería</td>
+                        @elseif($user->tipo_documento == 'PA')
+                            <td>Pasaporte</td>
+                        @elseif($user->tipo_documento == '4')
+                            <td>Registro Civil</td>
+                        @elseif($user->tipo_documento == 'NU')
+                            <td>No. Unico de Id. Personal</td>
+                        @elseif($user->tipo_documento == 'AS')
+                            <td>Adulto sin Identificacion</td>
+                        @elseif($user->tipo_documento == 'MS')
+                            <td>Menor sin Identificacion</td>
+                        @endif
+                        <td>{{$user->numero_documento}}</td>
+                        <td>{{$user->nombre1}}</td>
+                        <td>{{$user->nombre2}}</td>
+                        <td>{{$user->apellidos1}}</td>
+                        <td>{{$user->apellidos2}}</td>
+                        @if($user->genero == 1)
+                            <td>Masculino</td>
+                        @elseif($user->genero == 2)
+                            <td>Femenino</td>
+                        @endif
+                        <td>{{$user->ficha}}</td>
+                        <td>{{$user->puntaje}}</td>
+                    </tr>
+                @endforeach
+            @endif
         </table>
     </div>
     <p style="padding-left: 40px; padding-right: 40px;">
@@ -100,7 +136,7 @@
         <br/>
         Base de datos a corte del 21 de Octure de 2016.
     </p>
-    <img src="{{URL::to('img/Firma.png')}}" style="width: 40%;">
+    <img src="{{URL::to('img/Firma.png')}}" style="width: 25%;">
 </div>
 </body>
 </html>

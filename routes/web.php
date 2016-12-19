@@ -37,11 +37,11 @@ Route::get('sisben', function () {
     return view('sisben.form_consultar_sisben');
 });
 
-Route::get('sisben/consultar/{ced}', array(
+Route::get('sisben/consultar/{ced}/{tipo_doc}/{tipo}', array(
     'uses' => 'ApiController@consultarSisben'
 ));
 
-Route::get('sisben/certificado/{id}', array(
+Route::get('sisben/certificado/{id}/{tipo}', array(
     'uses' => 'ApiController@sisbenPDF'
 ));
 
